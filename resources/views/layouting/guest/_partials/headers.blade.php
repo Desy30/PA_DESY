@@ -15,11 +15,9 @@
 <!-- CSS -->
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/guest/vendors/styles/core.css') }}">
 <link rel="stylesheet" type="text/css" href="{{ asset('assets/guest/vendors/styles/icon-font.min.css') }}">
-<link rel="stylesheet" type="text/css"
-    href="{{ 'assets/guest/src/plugins/datatables/css/dataTables.bootstrap4.min.css' }}">
-<link rel="stylesheet" type="text/css"
-    href="{{ 'assets/guest/src/plugins/datatables/css/responsive.bootstrap4.min.css' }}">
-<link rel="stylesheet" type="text/css" href="{{ 'assets/guest/vendors/styles/style.css' }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/guest/plugins/datatables/css/dataTables.bootstrap4.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/guest/plugins/datatables/css/responsive.bootstrap4.min.css') }}">
+<link rel="stylesheet" type="text/css" href="{{ asset('assets/guest/vendors/styles/style.css') }}">
 
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-119386393-1"></script>
