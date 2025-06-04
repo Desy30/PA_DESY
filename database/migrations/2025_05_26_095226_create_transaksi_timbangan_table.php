@@ -9,25 +9,21 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up()
+    public function up(): void
     {
-        Schema::create('produk', function (Blueprint $table) {
-            $table->id();
-            $table->unsignedBigInteger('petani_id');
-            $table->string('nama_petani');
-            $table->string('alamat');
-            $table->string('no_hp');
-            $table->string('menu');
+        Schema::create('transaksi_timbangan', function (Blueprint $table) {
+            $table->uuid('id')->primary()->unique();
+            $table->uuid('id_transaksi');
+            $table->string('nama');
             $table->timestamps();
         });
     }
-
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('petani');
+        Schema::dropIfExists('transaksi_timbangan');
     }
 };
