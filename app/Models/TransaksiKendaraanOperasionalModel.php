@@ -9,7 +9,7 @@ class TransaksiKendaraanOperasionalModel extends Model
 {
     use HasUuids;
 
-    protected $table = 'transaksi_kendaraan_operasional';
+    protected $table = 'transaksi_kendaraan_operasional_detail';
     protected $primaryKey = 'id';
 
     protected $fillable = [

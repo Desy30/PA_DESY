@@ -2,37 +2,49 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+
 
 class LoginController extends Controller
 {
     public function loginPage()
     {
-        return view ('authentication.login');
+        return view('authentication.login');
     }
+
     public function login(Request $request)
     {
-        $request->validate([
-            'username' => "required|string",
-            'password' => "required|string"
-        ]);
-
-        $credentials = $request->only([
-            'username',
-            'password'
-        ]);
+        $credentials = $request->only('username', 'password');
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('petani');
+            $request->session()->regenerate();
+
+            $user = Auth::user();
+
+            
+            if ($user->hasRole('pemilik')) {
+                return redirect()->route('pengguna');
+            } elseif ($user->hasRole('kasir')) {
+                return redirect()->route('petani');
+            }
+
+            return redirect()->route('dashboard'); // fallback
         }
-        return redirect()->route('login');
+
+        return back()->withErrors([
+            'username' => 'Username atau password salah.',
+        ])->withInput();
     }
-    public function logout(Request$request)
+
+    public function logout(Request $request)
     {
         Auth::logout();
-
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect()->route('login');
     }
 

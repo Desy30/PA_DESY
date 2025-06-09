@@ -69,9 +69,9 @@
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="form-group">
-                                <label for="potongan">Potongan (kg)</label>
-                                <input type="number" class="form-control" id="potongan" name="potongan"
-                                    value="{{ old('potongan') }}">
+                                <label for="potongan_sawit">Potongan (kg)</label>
+                                <input type="number" class="form-control" id="potongan_sawit" name="potongan_sawit"
+                                    value="{{ old('potongan_sawit') }}">
                             </div>
                         </div>
 
@@ -110,12 +110,14 @@
                         <!-- Metode Pembayaran -->
                         <div class="col-12 col-md-6">
                             <div class="form-group">
-                                <label for="metode_pembayaran">Metode Pembayaran</label>
-                                <select class="form-control" id="metode_pembayaran" name="metode_pembayaran">
-                                    <option value="cash" {{ old('metode_pembayaran') == 'cash' ? 'selected' : '' }}>Cash
+                                <label for="metode_pembayaran_sawit">Metode Pembayaran</label>
+                                <select class="form-control" id="metode_pembayaran_sawit" name="metode_pembayaran_sawit">
+                                    <option value="cash"
+                                        {{ old('metode_pembayaran_sawit') == 'cash' ? 'selected' : '' }}>Cash
                                     </option>
                                     <option value="transfer"
-                                        {{ old('metode_pembayaran') == 'transfer' ? 'selected' : '' }}>Transfer</option>
+                                        {{ old('metode_pembayaran_sawit') == 'transfer' ? 'selected' : '' }}>Transfer
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -131,7 +133,7 @@
                     </div>
                 </div>
 
-
+                {{-- Kendaraan --}}
 
                 <div id="kendaraan_operasional" style="display: none;">
                     <div class="row">
@@ -189,13 +191,16 @@
                         <!-- Metode Pembayaran -->
                         <div class="col-12 col-md-6">
                             <div class="form-group">
-                                <label for="metode_pembayaran">Metode Pembayaran</label>
-                                <select class="form-control" id="metode_pembayaran" name="metode_pembayaran">
+                                <label for="metode_pembayaran_kendaraan">Metode Pembayaran</label>
+                                <select class="form-control" id="metode_pembayaran_kendaraan"
+                                    name="metode_pembayaran_kendaraan">
                                     <option value="">-- Pilih Metode --</option>
-                                    <option value="cash" {{ old('metode_pembayaran') == 'cash' ? 'selected' : '' }}>Cash
+                                    <option value="cash"
+                                        {{ old('metode_pembayaran_kendaraan') == 'cash' ? 'selected' : '' }}>Cash
                                     </option>
                                     <option value="transfer"
-                                        {{ old('metode_pembayaran') == 'transfer' ? 'selected' : '' }}>Transfer</option>
+                                        {{ old('metode_pembayaran_kendaraan') == 'transfer' ? 'selected' : '' }}>Transfer
+                                    </option>
                                 </select>
                             </div>
                         </div>
@@ -237,13 +242,15 @@
                         <!-- Tanggal Gaji -->
                         <div class="col-md-6 mb-3">
                             <label for="tanggal_gaji">Tanggal Gaji</label>
-                            <input type="date" class="form-control" id="tanggal_gaji" name="tanggal_gaji" value="{{ old('tanggal_gaji') }}">
+                            <input type="date" class="form-control" id="tanggal_gaji" name="tanggal_gaji"
+                                value="{{ old('tanggal_gaji') }}">
                         </div>
 
                         <!-- Periode -->
                         <div class="col-md-6 mb-3">
                             <label for="periode">Periode</label>
-                            <input type="month" class="form-control" id="periode" name="periode" value="{{ old('periode') }}">
+                            <input type="month" class="form-control" id="periode" name="periode"
+                                value="{{ old('periode') }}">
                         </div>
 
                         <!-- Nama Karyawan -->
@@ -252,7 +259,8 @@
                             <select class="form-control" id="id_karyawan" name="id_karyawan">
                                 <option value="">-- Pilih Karyawan --</option>
                                 @foreach ($karyawans as $item)
-                                    <option value="{{ $item->id }}" {{ old('id_karyawan') == $item->id ? 'selected' : '' }}>
+                                    <option value="{{ $item->id }}"
+                                        {{ old('id_karyawan') == $item->id ? 'selected' : '' }}>
                                         {{ $item->nama_karyawan }}
                                     </option>
                                 @endforeach
@@ -262,35 +270,43 @@
                         <!-- Tunjangan -->
                         <div class="col-md-6 mb-3">
                             <label for="tunjangan">Tunjangan</label>
-                            <input type="number" class="form-control" id="tunjangan" name="tunjangan" value="{{ old('tunjangan') }}">
+                            <input type="number" class="form-control" id="tunjangan" name="tunjangan"
+                                value="{{ old('tunjangan') }}">
                         </div>
 
                         <!-- Potongan -->
                         <div class="col-md-6 mb-3">
-                            <label for="potongan">Potongan</label>
-                            <input type="number" class="form-control" id="potongan" name="potongan" value="{{ old('potongan') }}">
+                            <label for="potongan_gaji">Potongan</label>
+                            <input type="number" class="form-control" id="potongan_gaji" name="potongan_gaji"
+                                value="{{ old('potongan_gaji') }}">
                         </div>
 
                         <!-- Total Gaji -->
                         <div class="col-md-6 mb-3">
                             <label for="total_gaji">Total Gaji</label>
-                            <input type="number" class="form-control" id="total_gaji" name="total_gaji" value="{{ old('total_gaji') }}">
+                            <input type="number" class="form-control" id="total_gaji" name="total_gaji"
+                                value="{{ old('total_gaji') }}">
                         </div>
 
                         <!-- Metode Pembayaran -->
                         <div class="col-md-6 mb-3">
-                            <label for="metode_pembayaran">Metode Pembayaran</label>
-                            <select class="form-control" id="metode_pembayaran" name="metode_pembayaran">
+                            <label for="metode_pembayaran_gaji">Metode Pembayaran</label>
+                            <select class="form-control" id="metode_pembayaran_gaji" name="metode_pembayaran_gaji">
                                 <option value="">-- Pilih Metode --</option>
-                                <option value="cash" {{ old('metode_pembayaran') == 'cash' ? 'selected' : '' }}>Cash</option>
-                                <option value="transfer" {{ old('metode_pembayaran') == 'transfer' ? 'selected' : '' }}>Transfer</option>
+                                <option value="cash" {{ old('metode_pembayaran_gaji') == 'cash' ? 'selected' : '' }}>
+                                    Cash
+                                </option>
+                                <option value="transfer"
+                                    {{ old('metode_pembayaran_gaji') == 'transfer' ? 'selected' : '' }}>
+                                    Transfer</option>
                             </select>
                         </div>
 
                         <!-- Upload Bukti -->
                         <div class="col-md-12 mb-3">
                             <label for="bukti_transaksi_gaji">Bukti Transaksi</label>
-                            <input type="file" class="form-control" id="bukti_transaksi_gaji" name="bukti_transaksi_gaji" accept="image/*,application/pdf">
+                            <input type="file" class="form-control" id="bukti_transaksi_gaji"
+                                name="bukti_transaksi_gaji" accept="image/*,application/pdf">
                         </div>
                     </div>
                 </div>
@@ -344,6 +360,8 @@
     <script>
         function toggleForm() {
             var sumberPengeluaran = $("#sumber_pengeluaran").val();
+            var sumberPengeluaran = sumberPengeluaran.split('.')[0]
+
             $("#pembelian_sawit").hide();
             $("#kendaraan_operasional").hide();
             $("#pengeluaran_gaji").hide();

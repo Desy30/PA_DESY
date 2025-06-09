@@ -24,7 +24,7 @@ class AuthenticationController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            return redirect()->route('pengguna');
+            return redirect()->route('petani');
         }
         return redirect()->route('login');
     }

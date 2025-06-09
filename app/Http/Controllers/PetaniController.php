@@ -16,7 +16,7 @@ class PetaniController extends Controller
         // Mengambil data petani dengan relasi
         $petani = PetaniModel::get();
         return view('admin.petani.index', compact('petani'));
-}
+    }
 
     public function create()
     {
@@ -52,8 +52,7 @@ class PetaniController extends Controller
             ]);
             // tambah
             return redirect()->route('petani')->with('success', 'Data berhasil disimpan!');
-        }
-         catch (Exception $e) {
+        } catch (Exception $e) {
             return redirect()->back()->withErrors($e->getMessage())->withInput();
         }
     }
@@ -67,60 +66,58 @@ class PetaniController extends Controller
     }
 
     public function update(Request $request, $id)
-{
-    // Validasi data
-    $request->validate([
-        'nama_petani' => 'required',
-        'tanda_tangan_petani' => 'sometimes|image',  // Validasi jika ada file yang diupload
-        'nomor_telepon_petani' => 'required',
-        'alamat_petani' => 'required',
-        'nomor_rekening_petani' => 'required',
-    ]);
-
-    // Mengambil data petani berdasarkan UUID
-    $petani = PetaniModel::findOrFail($id);
-
-    // Memperbarui data petani
-    $petani->update([
-        'nama_petani' => $request->nama_petani,
-        'nomor_telepon_petani' => $request->nomor_telepon_petani,
-        'alamat_petani' => $request->alamat_petani,
-        'nomor_rekening_petani' => $request->nomor_rekening_petani,
-    ]);
-
-    // Memperbarui tanda tangan jika ada file baru
-    if ($request->hasFile('tanda_tangan_petani')) {
-        $filename = time() . '-' . $request->file('tanda_tangan_petani')->getClientOriginalName();
-        $path = $request->file('tanda_tangan_petani')->storeAs('tanda_tangan', $filename, 'public');
-        $petani->update([
-            'tanda_tangan_petani' => $path,
+    {
+        // Validasi data
+        $request->validate([
+            'nama_petani' => 'required',
+            'tanda_tangan_petani' => 'sometimes|image',  // Validasi jika ada file yang diupload
+            'nomor_telepon_petani' => 'required',
+            'alamat_petani' => 'required',
+            'nomor_rekening_petani' => 'required',
         ]);
-    }
 
-    return redirect()->route('petani')->with('success', 'Data petani berhasil diperbarui!');
-}
-public function detail($id)
-{
-    $petani = PetaniModel::findOrFail($id);
-    return view('admin.petani.detail', compact('petani'));
-}
-
-public function destroy($id)
-{
-    try {
-        // Mencari data petani berdasarkan ID
+        // Mengambil data petani berdasarkan UUID
         $petani = PetaniModel::findOrFail($id);
 
-        // Menghapus data petani
-        $petani->delete();
+        // Memperbarui data petani
+        $petani->update([
+            'nama_petani' => $request->nama_petani,
+            'nomor_telepon_petani' => $request->nomor_telepon_petani,
+            'alamat_petani' => $request->alamat_petani,
+            'nomor_rekening_petani' => $request->nomor_rekening_petani,
+        ]);
 
-        // Redirect dengan pesan sukses
-        return redirect()->route('petani')->with('success', 'Data petani berhasil dihapus!');
-    } catch (Exception $e) {
-        // Jika terjadi error, kembalikan pesan error
-        return redirect()->route('petani')->with('error', 'Data petani gagal dihapus!');
+        // Memperbarui tanda tangan jika ada file baru
+        if ($request->hasFile('tanda_tangan_petani')) {
+            $filename = time() . '-' . $request->file('tanda_tangan_petani')->getClientOriginalName();
+            $path = $request->file('tanda_tangan_petani')->storeAs('tanda_tangan', $filename, 'public');
+            $petani->update([
+                'tanda_tangan_petani' => $path,
+            ]);
+        }
+
+        return redirect()->route('petani')->with('success', 'Data petani berhasil diperbarui!');
     }
-}
+    public function detail($id)
+    {
+        $petani = PetaniModel::findOrFail($id);
+        return view('admin.petani.detail', compact('petani'));
+    }
 
+    public function destroy($id)
+    {
+        try {
+            // Mencari data petani berdasarkan ID
+            $petani = PetaniModel::findOrFail($id);
 
+            // Menghapus data petani
+            $petani->delete();
+
+            // Redirect dengan pesan sukses
+            return redirect()->route('petani')->with('success', 'Data petani berhasil dihapus!');
+        } catch (Exception $e) {
+            // Jika terjadi error, kembalikan pesan error
+            return redirect()->route('petani')->with('error', 'Data petani gagal dihapus!');
+        }
+    }
 }

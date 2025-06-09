@@ -7,7 +7,7 @@
         </div>
         <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="{{ route('pengguna') }}">Petani</a></li>
+                <li class="breadcrumb-item"><a href="{{ route('pengguna') }}">Pengguna</a></li>
                 <li class="breadcrumb-item active" aria-current="page">List Pengguna</li>
             </ol>
         </nav>
@@ -33,28 +33,35 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td class="table-plus">1</td>
-                        <td>Kasir Mawar</td>
-                        <td>Kasir 32</td>
-                        <td>AKtif</td>
-                        <td>
-                            <div class="dropdown">
-                                <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
-                                   role="button" data-toggle="dropdown">
-                                    <i class="dw dw-more"></i>
-                                </a>
-                                {{-- <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                    <a class="dropdown-item" href="{{ route('pengguna.edit', 1) }}">
-                                        <i class="dw dw-edit2"></i> Edit
+                    @foreach ($users as $index => $user)
+                        <tr>
+                            <td class="table-plus">{{ $index + 1 }}</td>
+                            <td>{{ $user->name }}</td>
+                            <td>{{ ucfirst($user->role) }}</td>
+                            <td>Aktif</td> 
+                            <td>
+                                <div class="dropdown">
+                                    <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
+                                       role="button" data-toggle="dropdown">
+                                        <i class="dw dw-more"></i>
                                     </a>
-                                    <a class="dropdown-item" href="#">
-                                        <i class="dw dw-delete-3"></i> Delete
-                                    </a>
-                                </div> --}}
-                            </div>
-                        </td>
-                    </tr>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                        <a class="dropdown-item" href="{{ route('pengguna.edit', $user->id) }}">
+                                            <i class="dw dw-edit2"></i> Edit
+                                        </a>
+                                        <form action="{{ route('pengguna.destroy', $user->id) }}" method="POST"
+                                              onsubmit="return confirm('Yakin ingin hapus pengguna ini?');">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="dw dw-delete-3"></i> Hapus
+                                            </button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
         </div>

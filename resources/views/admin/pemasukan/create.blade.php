@@ -73,7 +73,7 @@
 
                         <div class="form-group col-12 col-md-6">
                             <label for="id_pks">PKS</label>
-                            <select class="form-control" id="id_pks" name="id_pks" >
+                            <select class="form-control" id="id_pks" name="id_pks">
                                 <option value="" {{ old('id_pks') == '' ? 'selected' : '' }}>-- Pilih PKS --</option>
                                 @foreach ($pks as $dataPks)
                                     <option value="{{ $dataPks->id }}"
@@ -181,8 +181,8 @@
                     </div>
                     <div class="form-group">
                         <label for="bukti_transaksi_pupuk">Bukti Transaksi</label>
-                        <input type="file" class="form-control" id="bukti_transaksi_pupuk" name="bukti_transaksi_pupuk"
-                            accept="image/*,application/pdf">
+                        <input type="file" class="form-control" id="bukti_transaksi_pupuk"
+                            name="bukti_transaksi_pupuk" accept="image/*,application/pdf">
                     </div>
                 </div>
 
@@ -203,8 +203,9 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="tanggal_timbangan">Tanggal Penimbangan</label>
-                                <input type="date" class="form-control" id="tanggal_timbangan" name="tanggal_timbangan"
-                                    value="{{ old('tanggal_timbangan') }}" placeholder="Masukkan Tanggal">
+                                <input type="date" class="form-control" id="tanggal_timbangan"
+                                    name="tanggal_timbangan" value="{{ old('tanggal_timbangan') }}"
+                                    placeholder="Masukkan Tanggal">
                             </div>
                         </div>
                     </div>
@@ -227,8 +228,8 @@
                     <!-- Bukti Pembayaran -->
                     <div class="form-group">
                         <label for="bukti_transaksi_timbangan">Bukti Pembayaran</label>
-                        <input type="file" class="form-control-file" id="bukti_transaksi_timbangan" name="bukti_transaksi_timbangan"
-                            accept="image/*,application/pdf">
+                        <input type="file" class="form-control-file" id="bukti_transaksi_timbangan"
+                            name="bukti_transaksi_timbangan" accept="image/*,application/pdf">
                     </div>
 
 
@@ -255,8 +256,8 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="bukti_transaksi_default">Bukti Transaksi</label>
-                                <input type="file" class="form-control" id="bukti_transaksi_default" name="bukti_transaksi_default"
-                                    accept="image/*">
+                                <input type="file" class="form-control" id="bukti_transaksi_default"
+                                    name="bukti_transaksi_default" accept="image/*">
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
@@ -317,6 +318,8 @@
         // Jalankan fungsi saat halaman pertama kali dimuat
         $(document).ready(function() {
             var sumberPemasukan = $("#sumber_pemasukan").val();
+            var sumberPemasukan = sumberPemasukan.split('.')[0]
+
             if (sumberPemasukan === "penjualan_sawit") {
                 $("#penjualan_sawit").show();
             } else if (sumberPemasukan === "penjualan_pupuk") {

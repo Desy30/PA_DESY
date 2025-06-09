@@ -33,14 +33,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pengeluarans as $key => $item)
+                    @foreach ($pengeluarans as $item)
                         <tr>
-                            <td>{{ $key + 1 }}</td>
-                            <td>{{ Carbon\Carbon::parse($item->tanggal)->format('d M Y') }}</td>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ \Carbon\Carbon::parse($item->tanggal)->translatedFormat('d F Y') }}</td>
                             <td>
-                                {{ $item->kategori->nama_kategori }}
+                                <span class="badge badge-warning text-capitalize">
+                                    {{ $item->kategori->nama_kategori ?? 'Tidak Diketahui' }}
+                                </span>
                             </td>
-                            <td>{{ $item->total }}</td>
+                            <td>
+                                <span class="badge badge-danger">
+                                    Rp {{ number_format($item->total, 0, ',', '.') }}
+                                </span>
+                            </td>
                             <td>
                                 <div class="dropdown">
                                     <button class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
@@ -49,10 +55,10 @@
                                         <i class="dw dw-more"></i>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="{{ route('pengeluaran.detail', 1) }}">
+                                        <a class="dropdown-item" href="{{ route('pengeluaran.detail', $item->id) }}">
                                             <i class="dw dw-eye"></i> Detail
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('pengeluaran.edit', 1) }}">
+                                        <a class="dropdown-item" href="{{ route('pengeluaran.edit', $item->id) }}">
                                             <i class="dw dw-edit2"></i> Edit
                                         </a>
                                     </div>
