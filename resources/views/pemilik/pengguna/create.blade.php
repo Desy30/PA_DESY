@@ -18,40 +18,31 @@
             <form method="POST" action="{{ route('pengguna.store') }}">
                 @csrf
 
-                <!-- Nama -->
-                <div class="form-group">
-                    <label for="name">Nama</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
-                        name="name" value="{{ old('name') }}" placeholder="Masukkan nama...">
-                    @error('name')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <!-- Role -->
-                <div class="form-group">
-                    <label for="role">Role</label>
-                    <select class="form-control @error('role') is-invalid @enderror" id="role" name="role" required>
-                        <option value="">-- Pilih Role --</option>
-                        @foreach ($roles as $role)
-                            <option value="{{ $role }}" {{ old('role') == $role ? 'selected' : '' }}>
-                                {{ ucfirst($role) }}
-                            </option>
-                        @endforeach
-                    </select>
-                    @error('role')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <!-- Kata Sandi -->
-                <div class="form-group">
-                    <label for="password">Kata Sandi</label>
-                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password"
-                        name="password" placeholder="••••••">
-                    @error('password')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                <div class="row">
+                    <div class="col-12">
+                        <div class="form-group">
+                            <label for="name">Nama</label>
+                            <input type="text" class="form-control @error('name') is-invalid @enderror" id="name"
+                                name="name" value="{{ old('name') }}" placeholder="Masukkan nama...">
+                            @error('name')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <!-- Nama -->
+                        <div class="form-group">
+                            <label for="name">Username</label>
+                            <input type="text" class="form-control @error('username') is-invalid @enderror" id="username"
+                                name="username" value="{{ old('username') }}" placeholder="Masukkan nama..." aria-describedby="usernameHelp">
+                            <div id="usernameHelp" class="form-text">
+                                Username akan menjadi password secara default
+                            </div>
+                            @error('username')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Buttons -->

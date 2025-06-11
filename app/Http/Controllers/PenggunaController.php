@@ -17,4 +17,22 @@ class PenggunaController extends Controller
     {
         return view('pemilik.pengguna.create');
     }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'username' => 'required|unique:users',
+        ]);
+
+        $user = User::create([
+            'name' => $request->name,
+            'username' => $request->username,
+            'password' => bcrypt($request->username),
+        ]);
+
+        $user->assignRole('kasir');
+
+        return redirect()->route('pengguna')->with('success', 'Pengguna berhasil ditambahkan');
+    }
 }

@@ -19,38 +19,38 @@
                 </li>
                 @hasanyrole('kasir')
                     <li>
-                        <a href="{{ route('kategori') }}" class="dropdown-toggle no-arrow">
+                        <a href="{{ route('kategori') }}" class="dropdown-toggle no-arrow {{ isRouteActive('kategori') }}">
                             <i class="micon fa fa-tag" aria-hidden="true"></i>
                             <span class="mtext">Kelola Kategori</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('petani') }}" class="dropdown-toggle no-arrow">
+                        <a href="{{ route('petani') }}" class="dropdown-toggle no-arrow {{ isRouteActive('petani') }}">
                             <i class="micon fa fa-users" aria-hidden="true"></i>
                             <span class="mtext">Data Petani</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('barang') }}" class="dropdown-toggle no-arrow">
+                        <a href="{{ route('barang') }}" class="dropdown-toggle no-arrow {{ isRouteActive('barang') }}">
                             <i class="micon fa fa-archive" aria-hidden="true"></i>
                             <span class="mtext">Data Barang</span>
                         </a>
                     </li>
 
                     <li>
-                        <a href="{{ route('pks') }}" class="dropdown-toggle no-arrow">
+                        <a href="{{ route('pks') }}" class="dropdown-toggle no-arrow {{ isRouteActive('pks') }}">
                             <i class="micon fa fa-building" aria-hidden="true"></i>
                             <span class="mtext">Data PKS</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('pupuk') }}" class="dropdown-toggle no-arrow">
+                        <a href="{{ route('pupuk') }}" class="dropdown-toggle no-arrow {{ isRouteActive('pupuk') }}">
                             <i class="micon fa fa-cogs" aria-hidden="true"></i>
                             <span class="mtext">Data Supplier Pupuk</span>
                         </a>
                     </li>
                     <li>
-                        <a href="{{ route('pengiriman') }}" class="dropdown-toggle no-arrow">
+                        <a href="{{ route('pengiriman') }}" class="dropdown-toggle no-arrow {{ isRouteActive('pengiriman') }}">
                             <i class="micon fa fa-truck" aria-hidden="true"></i>
                             <span class="mtext">Pengiriman</span>
                         </a>
@@ -66,13 +66,13 @@
 
                 @hasanyrole('pemilik')
                 <li>
-                    <a href="{{ route('karyawan') }}" class="dropdown-toggle no-arrow">
+                    <a href="{{ route('karyawan') }}" class="dropdown-toggle no-arrow {{ isRouteActive('karyawan') }}">
                         <i class="micon fa fa-user-plus" aria-hidden="true"></i>
                         <span class="mtext"> Karyawan</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('pengguna') }}" class="dropdown-toggle no-arrow">
+                    <a href="{{ route('pengguna') }}" class="dropdown-toggle no-arrow {{ isRouteActive('pengguna') }}">
                         <i class="micon fa fa-user-plus" aria-hidden="true"></i>
                         <span class="mtext"> Pengguna</span>
                     </a>
@@ -81,20 +81,20 @@
                 @endhasanyrole
 
                 <li>
-                    <a href="{{ route('pemasukan') }}" class="dropdown-toggle no-arrow">
+                    <a href="{{ route('pemasukan') }}" class="dropdown-toggle no-arrow {{ isRouteActive('pemasukan') }}">
                         <i class="micon fa fa-arrow-right" aria-hidden="true"></i>
                         <span class="mtext">Pemasukkan</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ route('pengeluaran') }}" class="dropdown-toggle no-arrow">
+                    <a href="{{ route('pengeluaran') }}" class="dropdown-toggle no-arrow {{ isRouteActive('pengeluaran') }}">
                         <i class="micon fa fa-arrow-left" aria-hidden="true"></i>
                         <span class="mtext">Pengeluaran</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('laporan') }}" class="dropdown-toggle no-arrow">
+                    <a href="{{ route('laporan') }}" class="dropdown-toggle no-arrow {{ isRouteActive('laporan') }}">
                         <i class="micon fa fa-file" aria-hidden="true"></i>
                         <span class="mtext">Laporan</span>
                     </a>

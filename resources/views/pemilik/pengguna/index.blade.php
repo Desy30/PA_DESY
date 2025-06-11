@@ -27,6 +27,7 @@
                     <tr>
                         <th class="table-plus datatable-nosort">No</th>
                         <th>Nama</th>
+                        <th>Username</th>
                         <th>Role</th>
                         <th>Status </th>
                         <th class="datatable-nosort">Menu</th>
@@ -37,6 +38,7 @@
                         <tr>
                             <td class="table-plus">{{ $index + 1 }}</td>
                             <td>{{ $user->name }}</td>
+                            <td>{{ $user->username }}</td>
                             <td>
                                 <ul>
                                     @forelse ($user->getRoleNames() as $name)
