@@ -37,12 +37,20 @@
                         <tr>
                             <td class="table-plus">{{ $index + 1 }}</td>
                             <td>{{ $user->name }}</td>
-                            <td>{{ ucfirst($user->role) }}</td>
-                            <td>Aktif</td> 
+                            <td>
+                                <ul>
+                                    @forelse ($user->getRoleNames() as $name)
+                                        <li class="text-capitalize">{{ $name }}</li>
+                                    @empty
+                                    -
+                                    @endforelse
+                                </ul>
+                            </td>
+                            <td>Aktif</td>
                             <td>
                                 <div class="dropdown">
                                     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
-                                       role="button" data-toggle="dropdown">
+                                        role="button" data-toggle="dropdown">
                                         <i class="dw dw-more"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
@@ -50,7 +58,7 @@
                                             <i class="dw dw-edit2"></i> Edit
                                         </a>
                                         <form action="{{ route('pengguna.destroy', $user->id) }}" method="POST"
-                                              onsubmit="return confirm('Yakin ingin hapus pengguna ini?');">
+                                            onsubmit="return confirm('Yakin ingin hapus pengguna ini?');">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="dropdown-item">

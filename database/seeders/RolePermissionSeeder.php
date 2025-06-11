@@ -50,8 +50,6 @@ class RolePermissionSeeder extends Seeder
             ]
         );
 
-        if (!$user->hasRole('kasir')) {
-            $user->assignRole('kasir');
-        }
+        $user->assignRole('pemilik');
     }
 }

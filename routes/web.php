@@ -122,7 +122,9 @@ Route::middleware('auth')->group(function () {
     Route::prefix('pengguna')->group(function () {
         Route::get('', [PenggunaController::class, 'index'])->name('pengguna');
         Route::get('create', [PenggunaController::class, 'create'])->name('pengguna.create');
+        Route::put('{id}/edit', [PenggunaController::class, 'edit'])->name('pengguna.edit');
         Route::post('', [PenggunaController::class, 'store'])->name('pengguna.store');
+        Route::delete('{id}', [PenggunaController::class, 'destroy'])->name('pengguna.destroy');
     });
 
 
