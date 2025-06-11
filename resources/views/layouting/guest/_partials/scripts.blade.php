@@ -11,3 +11,4 @@
 <script src="{{ asset('assets/guest/vendors/scripts/datatable-setting.js') }}"></script>
 
 
+@stack('scripts')

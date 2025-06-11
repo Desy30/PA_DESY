@@ -1,7 +1,8 @@
 <div class="left-side-bar">
     <div class="brand-logo">
         <a href="index.html">
-            <img src="{{ asset('assets\guest\vendors\images\Peron.png') }}" alt="" class="light-logo" width="80" height="80">
+            <img src="{{ asset('assets/guest/vendors/images/Peron.png') }}" alt="" class="light-logo" width="80"
+                height="80">
         </a>
         <div class="close-sidebar" data-toggle="left-sidebar-close">
             <i class="ion-close-round"></i>
@@ -11,91 +12,91 @@
         <div class="sidebar-menu">
             <ul id="accordion-menu">
                 <li>
-                    <a href="{{ route('petani') }}"
-                        class="dropdown-toggle no-arrow">
+                    <a href="{{ route('petani') }}" class="dropdown-toggle no-arrow">
                         <i class="micon dw dw-analytics-10" aria-hidden="true"></i>
-                        <span class="mtext">Dashboard<img src="vendors/images/coming-soon.png" alt=""
-                                width="25"></span>
+                        <span class="mtext">Dashboard</span>
+                    </a>
+                </li>
+                @hasanyrole('kasir')
+                    <li>
+                        <a href="{{ route('kategori') }}" class="dropdown-toggle no-arrow">
+                            <i class="micon fa fa-tag" aria-hidden="true"></i>
+                            <span class="mtext">Kelola Kategori</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('petani') }}" class="dropdown-toggle no-arrow">
+                            <i class="micon fa fa-users" aria-hidden="true"></i>
+                            <span class="mtext">Data Petani</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('barang') }}" class="dropdown-toggle no-arrow">
+                            <i class="micon fa fa-archive" aria-hidden="true"></i>
+                            <span class="mtext">Data Barang</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('pks') }}" class="dropdown-toggle no-arrow">
+                            <i class="micon fa fa-building" aria-hidden="true"></i>
+                            <span class="mtext">Data PKS</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('pupuk') }}" class="dropdown-toggle no-arrow">
+                            <i class="micon fa fa-cogs" aria-hidden="true"></i>
+                            <span class="mtext">Data Supplier Pupuk</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('pengiriman') }}" class="dropdown-toggle no-arrow">
+                            <i class="micon fa fa-truck" aria-hidden="true"></i>
+                            <span class="mtext">Pengiriman</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="{{ route('dokumentasi') }}" class="dropdown-toggle no-arrow">
+                            <i class="micon fa fa-folder-open" aria-hidden="true"></i>
+                            <span class="mtext">Dokumentasi Surat</span>
+                        </a>
+                    </li>
+                    @endhasanyrole
+
+                @hasanyrole('pemilik')
+                <li>
+                    <a href="{{ route('karyawan') }}" class="dropdown-toggle no-arrow">
+                        <i class="micon fa fa-user-plus" aria-hidden="true"></i>
+                        <span class="mtext"> Karyawan</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('petani') }}"
-                        class="dropdown-toggle no-arrow">
-                        <i class="micon fa fa-users" aria-hidden="true"></i>
-                        <span class="mtext">Data Petani <img src="vendors/images/coming-soon.png" alt=""
-                                width="25"></span>
+                    <a href="{{ route('pengguna') }}" class="dropdown-toggle no-arrow">
+                        <i class="micon fa fa-user-plus" aria-hidden="true"></i>
+                        <span class="mtext"> Pengguna</span>
                     </a>
                 </li>
+
+                @endhasanyrole
+
                 <li>
-                    <a href="{{ route('petani') }}"
-                        class="dropdown-toggle no-arrow">
-                        <i class="micon dw dw-add" aria-hidden="true"></i>
-                        <span class="mtext">Data PKS<img src="vendors/images/coming-soon.png" alt=""
-                                width="25"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('petani') }}"
-                        class="dropdown-toggle no-arrow">
-                        <i class="micon dw dw-add" aria-hidden="true"></i>
-                        <span class="mtext">Data Supplier Pupuk<img src="vendors/images/coming-soon.png" alt=""
-                                width="25"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('petani') }}"
-                        class="dropdown-toggle no-arrow">
-                        <i class="micon dw dw-add" aria-hidden="true"></i>
-                        <span class="mtext">Data Barang<img src="vendors/images/coming-soon.png" alt=""
-                                width="25"></span>
-                    </a>
-                </li>
-                <li>
-                    <div class="dropdown-divider"></div>
-                </li>
-                <li>
-                    <div class="sidebar-small-cap">Lihat Data Petani</div>
-                </li>
-                <li>
-                    <a href="{{ route('petani') }}"
-                        class="dropdown-toggle no-arrow">
-                        <i class="micon dw dw-right-arrow1" aria-hidden="true"></i>
-                        <span class="mtext">Pemasukkan<img src="vendors/images/coming-soon.png" alt=""
-                                width="25"></span>
+                    <a href="{{ route('pemasukan') }}" class="dropdown-toggle no-arrow">
+                        <i class="micon fa fa-arrow-right" aria-hidden="true"></i>
+                        <span class="mtext">Pemasukkan</span>
                     </a>
                 </li>
 
                 <li>
-                    <a href="{{ route('petani') }}"
-                        class="dropdown-toggle no-arrow">
-                        <i class="micon dw dw-left-arrow1" aria-hidden="true"></i>
-                        <span class="mtext">Pengeluaran<img src="vendors/images/coming-soon.png" alt=""
-                                width="25"></span>
+                    <a href="{{ route('pengeluaran') }}" class="dropdown-toggle no-arrow">
+                        <i class="micon fa fa-arrow-left" aria-hidden="true"></i>
+                        <span class="mtext">Pengeluaran</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('petani') }}"
-                        class="dropdown-toggle no-arrow">
-                        <i class="micon fas fa-file-archive-o" aria-hidden="true"></i>
-                        <span class="mtext">Laporan<img src="vendors/images/coming-soon.png" alt=""
-                                width="25"></span>
-                    </a>
-                </li>
-                <li>
-                    <a href="sitemap.html" class="dropdown-toggle no-arrow">
-                        <span class="micon dw dw-diagram"></span><span class="mtext">Kelola Kategori</span>
-                    </a>
-                </li>
-
-                {{-- <li>
-                    <a href="chat.html" class="dropdown-toggle no-arrow">
-                        <span class="micon dw dw-chat3"></span><span class="mtext">Chat</span>
-                    </a>
-                </li> --}}
-
-                <li>
-                    <a href="invoice.html" class="dropdown-toggle no-arrow">
-                        <span class="micon dw dw-invoice"></span><span class="mtext">Dokumentasi Surat</span>
+                    <a href="{{ route('laporan') }}" class="dropdown-toggle no-arrow">
+                        <i class="micon fa fa-file" aria-hidden="true"></i>
+                        <span class="mtext">Laporan</span>
                     </a>
                 </li>
             </ul>

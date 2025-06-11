@@ -1,0 +1,52 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class TransaksiModel extends Model
+{
+    use HasFactory,HasUuids;
+    protected $table = 'transaksi';
+
+    protected $fillable = [
+        'id',
+        'id_petani',
+        'id_pks',
+        'id_supplier',
+        'id_kategori',
+        'id_barang',
+        'id_user',
+        'total',
+        'tanggal',
+        'metode_pembayaran',
+        'status',
+        'bukti_transaksi',
+        'keterangan'
+    ];
+
+
+
+    public  function petani () {
+        return $this->belongsTo(PetaniModel::class, 'id_petani');
+    }
+
+    public function pks () {
+        return $this->belongsTo(PksModel::class, 'id_pks');
+    }
+
+    public function supplier_pupuk () {
+        return $this->belongsTo(SupplierPupukModel::class, 'id_supplier');
+    }
+
+    public function kategori () {
+        return $this->belongsTo(KategoriModel::class, 'id_kategori');
+    }
+
+    public function user () {
+        return $this->belongsTo(User::class, 'id_user');
+    }
+
+}
