@@ -13,13 +13,12 @@ class DokumentasiController extends Controller
 
     public function index(Request $request)
     {
-
-        $kategori = $request->kategori;
-        $files = collect(); // kumpulan dokumen
+        $kategori = $request->jenis_surat;
+        $files = collect();
 
         // Ambil dari tabel transaksi
         if (!$kategori || $kategori === 'transaksi') {
-            $transaksi = \App\Models\TransaksiModel::whereNotNull('bukti_transaksi')->get()->map(function ($item) {
+            $transaksi = TransaksiModel::whereNotNull('bukti_transaksi')->get()->map(function ($item) {
                 return (object)[
                     'kategori' => 'Transaksi',
                     'bukti_transaksi' => $item->bukti_transaksi,
@@ -28,9 +27,11 @@ class DokumentasiController extends Controller
             $files = $files->merge($transaksi);
         }
 
-        // Ambil dari tabel sawit
         if (!$kategori || $kategori === 'sawit') {
-            $sawit = \App\Models\TransaksiSawitModel::whereNotNull('surat_pengantar', 'BON')->get()->map(function ($item) {
+            $sawit = TransaksiSawitModel::whereNotNull('surat_pengantar')
+                ->where('surat_pengantar', '!=', 'BON')
+                ->get()
+                ->map(function ($item) {
                 return (object)[
                     'kategori' => 'Sawit',
                     'surat_pengantar' => $item->surat_pengantar,
@@ -45,8 +46,4 @@ class DokumentasiController extends Controller
             'kategori_terpilih' => $kategori,
         ]);
     }
-
-
-
-
 }
