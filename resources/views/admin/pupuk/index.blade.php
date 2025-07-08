@@ -1,4 +1,5 @@
 @extends('layouting.guest.master')
+@section('title', 'Supplier Pupuk')
 
 @section('content')
     <div class="page-header">
@@ -17,9 +18,10 @@
     <div class="card-box mb-30">
         <div class="pd-20">
             <div class="d-flex justify-content-between align-items-center">
-                <h4 class="text-blue h4">Supplier Pupuk</h4>
+                <h4 class="text-blue h4">Data Supplier Pupuk</h4>
                 <a href="{{ route('pupuk.create') }}" class="btn btn-sm btn-primary">Tambah Data</a>
             </div>
+            {{-- success message --}}
             @if (session('success'))
                 <div class="mt-2 alert alert-success">
                     {{ session('success') }}
@@ -32,31 +34,30 @@
                     <tr>
                         <th class="table-plus datatable-nosort">No</th>
                         <th>Nama Supplier</th>
-                        <th>Alamat</th>
                         <th>Nomor Telepon</th>
+                        <th>Alamat</th>
                         <th class="datatable-nosort">Menu</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach ($pupuk as $index => $supplier)
+                    @foreach ($pupuk as $index => $item)
                         <tr>
-                            <td>{{ $index + 1 }}</td>
-                            <td>{{ $supplier->nama_supplier }}</td>
-                            <td>{{ $supplier->alamat_supplier }}</td>
-                            <td>{{ $supplier->nomor_telepon_supplier }}</td>
+                            <td class="table-plus">{{ $index + 1 }}</td>
+                            <td>{{ $item->nama_supplier }}</td>
+                            <td>{{ $item->nomor_telepon_supplier }}</td>
+                            <td>{{ $item->alamat_supplier }}</td>
                             <td>
-                                <!-- Dropdown Menu in the same cell as data -->
                                 <div class="dropdown">
                                     <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
                                         href="#" role="button" data-toggle="dropdown">
                                         <i class="dw dw-more"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                        <a class="dropdown-item" href="{{ route('pupuk.edit', $supplier->id) }}">
+                                        <a class="dropdown-item" href="{{ route('pupuk.edit', $item->id) }}">
                                             <i class="dw dw-edit2"></i> Edit
                                         </a>
-                                        <!-- Form delete untuk supplier -->
-                                        <form action="{{ route('pupuk.destroy', $supplier->id) }}" method="POST" style="display:inline;">
+                                        <form action="{{ route('pupuk.destroy', $item->id) }}" method="POST"
+                                            style="display:inline;">
                                             @csrf
                                             @method('DELETE')
                                             <button type="submit" class="dropdown-item"
@@ -64,6 +65,9 @@
                                                 <i class="dw dw-delete-3"></i> Delete
                                             </button>
                                         </form>
+                                        <a class="dropdown-item" href="{{ route('pupuk.show', $item->id) }}">
+                                            <i class="dw dw-eye"></i> Detail
+                                        </a>
                                     </div>
                                 </div>
                             </td>

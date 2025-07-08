@@ -1,5 +1,7 @@
 @extends('layouting.guest.master')
 
+
+@section('title', 'Pengeluaran')
 @section('content')
     <div class="page-header">
         <div class="title">
@@ -18,7 +20,9 @@
         <div class="pd-20">
             <div class="d-flex justify-content-between align-items-center">
                 <h4 class="text-blue h4">Pengeluaran</h4>
-                <a href="{{ route('pengeluaran.create') }}" class="btn btn-sm btn-primary">Tambah Pengeluaran</a>
+                @hasanyrole('kasir')
+                    <a href="{{ route('pengeluaran.create') }}" class="btn btn-sm btn-primary">Tambah Pengeluaran</a>
+                @endhasanyrole
             </div>
         </div>
         <div class="pb-20">
@@ -26,10 +30,10 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Tanggal</th>
-                        <th>Sumber</th>
-                        <th>Jumlah</th>
-                        <th>Menu</th>
+                        <th> 📅 Tanggal</th>
+                        <th> 📤 Sumber</th>
+                        <th> 💵 Jumlah</th>
+                        <th> ⋯  Menu</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,7 +59,7 @@
                                         <i class="dw dw-more"></i>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="{{ route('pengeluaran.detail', $item->id) }}">
+                                        <a class="dropdown-item" href="{{ route('pengeluaran.show', $item->id) }}">
                                             <i class="dw dw-eye"></i> Detail
                                         </a>
                                         <a class="dropdown-item" href="{{ route('pengeluaran.edit', $item->id) }}">

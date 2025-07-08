@@ -21,10 +21,11 @@ return new class extends Migration
             $table->uuid('id_user')->nullable();
             $table->double('total');
             $table->date('tanggal');
-            $table->string(column: 'status')->nullable();
+            $table->string(column: 'status_pengiriman')->nullable();
             $table->enum('metode_pembayaran', ['Cash', 'Transfer']);
             $table->string('bukti_transaksi')->nullable();
             $table->string('keterangan')->nullable();
+
             $table->timestamps();
 
             $table->foreign('id_petani')->references('id')->on('petani');

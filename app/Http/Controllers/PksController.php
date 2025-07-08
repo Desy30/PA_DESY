@@ -30,19 +30,14 @@ class PksController extends Controller
             'nama_pks' => 'required',
             'nomor_telepon_pks' => 'required',
             'alamat_pks' => 'required',
-            'tanda_tangan_pks' => 'required|image|max:2048', // Validasi untuk gambar
         ]);
 
-        // Mengolah file gambar tanda tangan
-        $filename = time() . '-' . $request->file('tanda_tangan_pks')->getClientOriginalName();
-        $path = $request->file('tanda_tangan_pks')->storeAs('pks', $filename, 'public');
 
         // Menyimpan data PKS ke database
         PksModel::create([
             'nama_pks' => $request->nama_pks,
             'nomor_telepon_pks' => $request->nomor_telepon_pks,
             'alamat_pks' => $request->alamat_pks,
-            'tanda_tangan_pks' => $path,  // Simpan path file gambar
         ]);
 
         return redirect()->route('pks')->with('success', 'Data PKS berhasil disimpan!');
@@ -63,7 +58,6 @@ class PksController extends Controller
             'nama_pks' => 'required',
             'nomor_telepon_pks' => 'required',
             'alamat_pks' => 'required',
-            'tanda_tangan_pks' => 'sometimes|image|max:2048',  // Validasi untuk gambar jika ada file yang diupload
         ]);
 
         // Menemukan data PKS berdasarkan ID
@@ -76,24 +70,13 @@ class PksController extends Controller
             'alamat_pks' => $request->alamat_pks,
         ]);
 
-        // Memperbarui tanda tangan jika ada file baru
-        if ($request->hasFile('tanda_tangan_pks')) {
-            // Menghapus gambar lama jika ada
-            if (Storage::disk('public')->exists($pks->tanda_tangan_pks)) {
-                Storage::disk('public')->delete($pks->tanda_tangan_pks);
-            }
-
-            // Mengolah file gambar tanda tangan yang baru
-            $filename = time() . '-' . $request->file('tanda_tangan_pks')->getClientOriginalName();
-            $path = $request->file('tanda_tangan_pks')->storeAs('pks', $filename, 'public');
-
-            // Memperbarui path gambar tanda tangan di database
-            $pks->update([
-                'tanda_tangan_pks' => $path,
-            ]);
-        }
-
         return redirect()->route('pks')->with('success', 'Data PKS berhasil diperbarui!');
+    }
+    //show data pks
+    public function show($id)
+    {
+        $pks = PksModel::findOrFail($id);
+        return view('admin.pks.show', compact('pks'));
     }
 
     // Menghapus data PKS
@@ -102,11 +85,6 @@ class PksController extends Controller
         try {
             // Menemukan data PKS berdasarkan ID
             $pks = PksModel::findOrFail($id);
-
-            // Menghapus gambar tanda tangan jika ada
-            if (Storage::disk('public')->exists($pks->tanda_tangan_pks)) {
-                Storage::disk('public')->delete($pks->tanda_tangan_pks);
-            }
 
             // Menghapus data PKS
             $pks->delete();

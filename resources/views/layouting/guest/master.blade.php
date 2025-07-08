@@ -8,8 +8,8 @@
 <body>
     <div class="pre-loader">
         <div class="pre-loader-box">
-            <div class="loader-logo"><img src="{{ asset('assets\guest\vendors\images\Peron.png') }}" alt="" width="200"
-                    height="200"></div>
+            <div class="loader-logo"><img src="{{ asset('assets/guest/images/logo.png') }}" alt=""
+                    width="300" height="300"></div>
 
             <div class='loader-progress' id="progress_div">
                 <div class='bar' id='bar1'></div>
@@ -21,7 +21,7 @@
         </div>
     </div>
 
-    @include('layouting.guest._partials.navbar')
+    @include('layouting.guest._partials.navbar') --}}
 
     @include('layouting.guest._partials.sidebar')
 

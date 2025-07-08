@@ -1,5 +1,6 @@
 @extends('layouting.guest.master')
 
+@section('title', 'Barang')
 @section('content')
     <div class="page-header">
         <div class="title">
@@ -56,11 +57,11 @@
                                         <i class="dw dw-more"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                        <a class="dropdown-item" href="{{ route('barang.detail', $item->id) }}">
-                                            <i class="dw dw-eye"></i> Detail
-                                        </a>
                                         <a class="dropdown-item" href="{{ route('barang.edit', $item->id) }}">
                                             <i class="dw dw-edit2"></i> Edit
+                                        </a>
+                                        <a class="dropdown-item" href="{{ route('barang.show', $item->id) }}">
+                                            <i class="dw dw-eye"></i> Detail
                                         </a>
                                         <form action="{{ route('barang.destroy', $item->id) }}" method="POST"
                                             style="display: inline;">

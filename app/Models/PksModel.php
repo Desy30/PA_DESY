@@ -17,7 +17,6 @@ class PksModel extends Model
         'nama_pks',
         'nomor_telepon_pks',
         'alamat_pks',
-        'tanda_tangan_pks',
     ];
 
     public $incrementing = false;

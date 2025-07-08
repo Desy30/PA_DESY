@@ -1,5 +1,6 @@
 @extends('layouting.guest.master')
 
+@section('title', 'Pemasukan')
 @section('content')
     <div class="page-header">
         <div class="title">
@@ -18,7 +19,9 @@
         <div class="pd-20">
             <div class="d-flex justify-content-between align-items-center">
                 <h4 class="text-blue h4">Pemasukan</h4>
+                @hasanyrole('kasir')
                 <a href="{{ route('pemasukan.create') }}" class="btn btn-sm btn-primary">Tambah Pemasukan</a>
+                @endhasanyrole
             </div>
         </div>
         <div class="pb-20">
@@ -55,7 +58,7 @@
                                         <i class="dw dw-more"></i>
                                     </button>
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                                        <a class="dropdown-item" href="{{ route('pemasukan.detail', $item->id) }}">
+                                        <a class="dropdown-item" href="{{ route('pemasukan.show', $item->id) }}">
                                             <i class="dw dw-eye"></i> Detail
                                         </a>
                                         <a class="dropdown-item" href="{{ route('pemasukan.edit', $item->id) }}">

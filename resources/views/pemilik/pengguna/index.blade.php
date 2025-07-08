@@ -1,4 +1,5 @@
 @extends('layouting.guest.master')
+@section('title', 'Pengguna')
 
 @section('content')
     <div class="page-header">
@@ -44,15 +45,15 @@
                                     @forelse ($user->getRoleNames() as $name)
                                         <li class="text-capitalize">{{ $name }}</li>
                                     @empty
-                                    -
+                                        -
                                     @endforelse
                                 </ul>
                             </td>
                             <td>Aktif</td>
                             <td>
                                 <div class="dropdown">
-                                    <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#"
-                                        role="button" data-toggle="dropdown">
+                                    <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
+                                        href="#" role="button" data-toggle="dropdown">
                                         <i class="dw dw-more"></i>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">

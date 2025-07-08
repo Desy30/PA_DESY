@@ -1,4 +1,6 @@
 @extends('layouting.guest.master')
+@section('title', 'Tambah Pengeluaran')
+
 
 @section('content')
     <div class="page-header">
@@ -43,8 +45,7 @@
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="tanggal_sawit">Tanggal</label>
-                                <input type="date" class="form-control" id="tanggal_sawit" name="tanggal_sawit"
-                                    value="{{ old('tanggal_sawit') }}">
+                                <input type="date" class="form-control" id="tanggal_sawit" name="tanggal_sawit" value="{{ old('tanggal_sawit') }}">
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
@@ -59,51 +60,72 @@
                             </div>
                         </div>
 
-                        <!-- Bruto & Potongan -->
+                        <!-- Bruto & Tara -->
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="bruto">Bruto (kg)</label>
-                                <input type="number" class="form-control" id="bruto" name="bruto"
-                                    value="{{ old('bruto') }}">
+                                <input type="number" class="form-control" id="bruto" name="bruto" value="{{ old('bruto', 0) }}">
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="form-group">
-                                <label for="potongan_sawit">Potongan (kg)</label>
-                                <input type="number" class="form-control" id="potongan_sawit" name="potongan_sawit"
-                                    value="{{ old('potongan_sawit') }}">
+                                <label for="tara">Tara (kg)</label>
+                                <input type="number" class="form-control" id="tara" name="tara" value="{{ old('tara', 0) }}">
                             </div>
                         </div>
 
-                        <!-- Berat Bersih & Harga -->
+                        <!-- Netto full width -->
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="netto">Netto</label>
+                                <input type="number" class="form-control" id="netto" name="netto" value="{{ old('netto', 0) }}" disabled>
+                            </div>
+                        </div>
+
+                        <!-- Jenis Potongan & Potongan in one row -->
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label for="jenis_potongan">Jenis Potongan</label>
+                                <select class="form-control" id="jenis_potongan" name="jenis_potongan">
+                                    <option value="persentase" {{ old('jenis_potongan') == 'persen' ? 'selected' : '' }}>Persentase (%)</option>
+                                    <option value="fix" {{ old('jenis_potongan') == 'fix' ? 'selected' : '' }}>Fix (kg)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label for="potongan_sawit">Potongan</label>
+                                <input type="text" class="form-control" id="potongan_sawit" name="potongan_sawit" value="{{ old('potongan_sawit', 0) }}">
+                            </div>
+                        </div>
+
+                        <!-- Jumlah Potongan full width -->
+                        <div class="col-12">
+                            <div class="form-group">
+                                <label for="jumlah_potongan">Jumlah Potongan (KG)</label>
+                                <input type="number" class="form-control" id="jumlah_potongan" name="jumlah_potongan" value="{{ old('jumlah_potongan', 0) }}" disabled>
+                            </div>
+                        </div>
+
+                        <!-- Harga per Kg -->
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
+                                <label for="harga_per_kg">Harga per Kg (Rp)</label>
+                                <input type="number" class="form-control" id="harga_per_kg" name="harga_per_kg" value="{{ old('harga_per_kg', 0) }}">
+                            </div>
+                        </div>
+
+                        <!-- Berat Bersih & Total Harga -->
                         <div class="col-12 col-md-6">
                             <div class="form-group">
                                 <label for="berat_bersih">Berat Bersih (kg)</label>
-                                <input type="number" class="form-control" id="berat_bersih" name="berat_bersih"
-                                    value="{{ old('berat_bersih') }}">
+                                <input type="number" class="form-control" id="berat_bersih" name="berat_bersih" value="{{ old('berat_bersih', 0) }}" disabled>
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="form-group">
-                                <label for="harga">Harga per Kg (Rp)</label>
-                                <input type="number" class="form-control" id="harga" name="harga"
-                                    value="{{ old('harga') }}">
-                            </div>
-                        </div>
-
-                        <!-- Netto & Total -->
-                        <div class="col-12 col-md-6">
-                            <div class="form-group">
-                                <label for="netto">Netto (Rp)</label>
-                                <input type="number" class="form-control" id="netto" name="netto"
-                                    value="{{ old('netto') }}">
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="form-group">
-                                <label for="total_sawit">Total Transaksi (Rp)</label>
-                                <input type="number" class="form-control" id="total_sawit" name="total_sawit"
-                                    value="{{ old('total_sawit') }}">
+                                <label for="total_harga_sawit">Total Transaksi (Rp)</label>
+                                <input type="number" class="form-control" id="total_harga_sawit" name="total_harga_sawit" value="{{ old('total_harga_sawit', 0) }}" disabled>
                             </div>
                         </div>
 
@@ -112,26 +134,23 @@
                             <div class="form-group">
                                 <label for="metode_pembayaran_sawit">Metode Pembayaran</label>
                                 <select class="form-control" id="metode_pembayaran_sawit" name="metode_pembayaran_sawit">
-                                    <option value="cash"
-                                        {{ old('metode_pembayaran_sawit') == 'cash' ? 'selected' : '' }}>Cash
-                                    </option>
-                                    <option value="transfer"
-                                        {{ old('metode_pembayaran_sawit') == 'transfer' ? 'selected' : '' }}>Transfer
-                                    </option>
+                                    <option value="cash" {{ old('metode_pembayaran_sawit') == 'cash' ? 'selected' : '' }}>Cash</option>
+                                    <option value="transfer" {{ old('metode_pembayaran_sawit') == 'transfer' ? 'selected' : '' }}>Transfer</option>
                                 </select>
                             </div>
                         </div>
 
                         <!-- Upload Bukti -->
-                        <div class="col-12 col-md-6">
+                        <div class="col-12">
                             <div class="form-group">
                                 <label for="bukti_transaksi_sawit">Upload Bukti Transaksi</label>
-                                <input type="file" class="form-control" id="bukti_transaksi_sawit"
-                                    name="bukti_transaksi_sawit" accept="image/*,application/pdf">
+                                <input type="file" class="form-control" id="bukti_transaksi_sawit" name="bukti_transaksi_sawit" accept="image/*,application/pdf">
                             </div>
                         </div>
                     </div>
                 </div>
+
+
 
                 {{-- Kendaraan --}}
 
@@ -249,22 +268,29 @@
                         <!-- Periode -->
                         <div class="col-md-6 mb-3">
                             <label for="periode">Periode</label>
-                            <input type="month" class="form-control" id="periode" name="periode"
+                            <input type="date" class="form-control" id="periode" name="periode"
                                 value="{{ old('periode') }}">
                         </div>
 
                         <!-- Nama Karyawan -->
                         <div class="col-md-6 mb-3">
                             <label for="id_karyawan">Pilih Karyawan</label>
-                            <select class="form-control" id="id_karyawan" name="id_karyawan">
+                            <select id="id_karyawan" class="form-control" name="id_karyawan">
                                 <option value="">-- Pilih Karyawan --</option>
-                                @foreach ($karyawans as $item)
-                                    <option value="{{ $item->id }}"
-                                        {{ old('id_karyawan') == $item->id ? 'selected' : '' }}>
-                                        {{ $item->nama_karyawan }}
+                                @foreach ($karyawans as $karyawan)
+                                    <option value="{{ $karyawan->id }}" data-gaji="{{ $karyawan->gaji }}">
+                                        {{ $karyawan->nama_karyawan }}
                                     </option>
                                 @endforeach
                             </select>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="gaji">Gaji</label>
+                                <input type="text" class="form-control" id="gaji" name="gaji"
+                                    placeholder="Masukkan atau ubah gaji" readonly>
+                                    {{-- readonly->agar kasir hanya bisa lihat hasil inputan dari pemilik --}}
+                            </div>
                         </div>
 
                         <!-- Tunjangan -->
@@ -310,9 +336,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
                 {{-- Default --}}
                 <div id="default" style="display: none;">
                     <div class="row">
@@ -337,19 +360,8 @@
                 <!-- Tombol Save dan Print -->
                 <div class="d-flex justify-content-end">
                     <a href="{{ route('pengeluaran') }}" class="btn btn-danger">Batal</a>
-                    <button type="submit" class="btn btn-success ml-2">Simpan</button>
-                    <button type="button" class="btn btn-secondary ml-2" id="btn-print">Print Transaksi</button>
+                    <button type="submit" class="btn btn-success ml-2" id="btn-save">Simpan</button>
                 </div>
-
-                <script>
-                    document.getElementById('btn-print').addEventListener('click', function() {
-                        // Contoh sederhana: print halaman saat ini
-                        window.print();
-
-                        // Kalau ingin print bagian tertentu atau membuka halaman print baru,
-                        // sesuaikan script di sini sesuai kebutuhan.
-                    });
-                </script>
             </form>
 
         </div>
@@ -367,8 +379,11 @@
             $("#pengeluaran_gaji").hide();
             $("#default").hide();
 
+            $("#btn-save").text('Simpan');
             if (sumberPengeluaran.startsWith("pembelian_sawit")) {
                 $("#pembelian_sawit").show();
+                $("#btn-save").text('Simpan + Cetak');
+
             } else if (sumberPengeluaran.startsWith("kendaraan_operasional")) {
                 $("#kendaraan_operasional").show();
             } else if (sumberPengeluaran.startsWith("pengeluaran_gaji")) {
@@ -385,6 +400,105 @@
             }
             toggleForm();
             $("#sumber_pengeluaran").change(toggleForm);
+        });
+
+
+        $(document).ready(function() {
+            var inputBruto = $('#bruto');
+            var inputTara = $('#tara');
+            var inputNetto = $('#netto');
+            var inputJenisPotongan = $("#jenis_potongan")
+            var inputPotongan = $("#potongan_sawit")
+            var inputJumlahPotongan = $("#jumlah_potongan")
+            var inputBeratBersih = $("#berat_bersih")
+            var inputHargaPerKilo = $("#harga_per_kg")
+            var inputHargaTotalSawit = $("#total_harga_sawit")
+
+            function hitungSeluruh() {
+                var valBruto = parseInt(inputBruto.val());
+                var valTara = parseInt(inputTara.val());
+                var netto = valBruto - valTara;
+                inputNetto.val(netto);
+
+                var intValPotongan = parseInt(inputPotongan.val())
+                var valJenisPotongan = inputJenisPotongan.val()
+
+                var jumlahAkhirPotongan = 0
+
+                if (valJenisPotongan == 'persentase') {
+                    jumlahAkhirPotongan = netto - (netto * intValPotongan / 100)
+                } else {
+                    jumlahAkhirPotongan = netto - intValPotongan
+                }
+
+                var nilaiTotalPotongan = Math.round(netto - jumlahAkhirPotongan)
+                inputJumlahPotongan.val(nilaiTotalPotongan)
+
+                var nilaiBeratBersih = Math.round(netto - nilaiTotalPotongan)
+                inputBeratBersih.val(nilaiBeratBersih)
+
+                var valHargaPerKilo = parseInt(inputHargaPerKilo.val())
+                var nilaiHargaTotalSawit = nilaiBeratBersih * valHargaPerKilo
+
+                inputHargaTotalSawit.val(nilaiHargaTotalSawit)
+            }
+
+            inputBruto.on('input', function() {
+                hitungSeluruh();
+            })
+
+            inputTara.on('input', function() {
+                hitungSeluruh();
+            })
+
+
+            inputJenisPotongan.change(function() {
+                hitungSeluruh();
+            })
+
+            inputPotongan.on('input', function() {
+                hitungSeluruh();
+            })
+
+            inputHargaPerKilo.on('input', function() {
+                hitungSeluruh();
+            })
+        })
+        $(document).ready(function() {
+            // Ambil elemen input
+            const inputGaji = document.getElementById('gaji');
+            const inputTunjangan = document.getElementById('tunjangan');
+            const inputPotonganGaji = document.getElementById('potongan_gaji');
+            const inputTotal = document.getElementById('total_gaji');
+
+            // Fungsi untuk menghitung total gaji
+            function hitungTotalGaji() {
+                const gaji = parseFloat(inputGaji.value) || 0;
+                const tunjangan = parseFloat(inputTunjangan.value) || 0;
+                const potongan = parseFloat(inputPotonganGaji.value) || 0;
+
+                const total = gaji + tunjangan - potongan;
+                inputTotal.value = total;
+            }
+
+            // Pasang listener untuk perubahan input
+            [inputGaji, inputTunjangan, inputPotonganGaji].forEach(input => {
+                input.addEventListener('input', hitungTotalGaji);
+            });
+
+            // Saat karyawan dipilih, isi gaji otomatis
+            $('#id_karyawan').on('change', function() {
+                const selected = this.options[this.selectedIndex];
+                const gaji = selected.getAttribute('data-gaji');
+
+                if (gaji) {
+                    inputGaji.value = gaji;
+                } else {
+                    inputGaji.value = '';
+                }
+
+                hitungTotalGaji(); // hitung ulang setelah gaji terisi
+            });
         });
     </script>
 @endpush

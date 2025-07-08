@@ -1,4 +1,6 @@
 @extends('layouting.guest.master')
+@section('title', 'Tambah Pemasukan')
+
 
 @section('content')
     <div class="page-header">
@@ -84,26 +86,11 @@
                             </select>
                         </div>
                         <!-- Surat Pengantar & BON -->
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 ">
                             <div class="form-group">
                                 <label for="surat_pengantar">Surat Pengantar</label>
                                 <input type="file" class="form-control" id="surat_pengantar" name="surat_pengantar"
                                     value="{{ old('surat_pengantar') }}">
-                            </div>
-                        </div>
-                        <div class="col-12 col-md-6">
-                            <div class="form-group">
-                                <label for="BON">BON</label>
-                                <input type="file" class="form-control" id="BON" name="bon"
-                                    value="{{ old('BON') }}">
-                            </div>
-                        </div>
-                        <!-- Jumlah Uang -->
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label for="total">Jumlah Uang</label>
-                                <input type="number" class="form-control" id="total" name="total_sawit"
-                                    placeholder="Jumlah uang" value="{{ old('total') }}">
                             </div>
                         </div>
                     </div>
@@ -198,7 +185,6 @@
                                     value="{{ old('nama') }}" placeholder="Masukkan Nama">
                             </div>
                         </div>
-
                         <!-- Input Tanggal Penimbangan -->
                         <div class="col-12 col-md-6">
                             <div class="form-group">
@@ -231,10 +217,7 @@
                         <input type="file" class="form-control-file" id="bukti_transaksi_timbangan"
                             name="bukti_transaksi_timbangan" accept="image/*,application/pdf">
                     </div>
-
-
                 </div>
-
                 {{-- Default --}}
                 <div id="default" style="display: none;">
                     <div class="row">

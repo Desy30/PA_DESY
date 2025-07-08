@@ -12,11 +12,31 @@ class KategoriController extends Controller
 {
 
     // Menampilkan semua kategori
-    public function index()
+    public function index(Request $request)
     {
-        // Mengambil data kategori
-        $kategories = KategoriModel::all(); // Menampilkan semua data kategori
-        return view('admin.kategori.index', compact('kategories')); // Menampilkan view index kategori dengan data
+        $query = KategoriModel::query();
+
+        // Filter berdasarkan jenis_kategori
+        if ($request->has('jenis_kategori') && $request->jenis_kategori != '') {
+            $query->where('jenis_kategori', $request->jenis_kategori);
+        }
+
+        // Filter berdasarkan nama kategori
+        if ($request->has('search_kategori') && $request->search_kategori != '') {
+            $query->where('nama_kategori', 'like', '%' . $request->search_kategori . '%');
+        }
+
+        $kategories = $query->get();
+
+        return view('admin.kategori.index', compact('kategories'));
+    }
+
+
+    public function getByJenis(Request $request)
+    {
+        $jenis = $request->input('jenis');
+        $kategories = KategoriModel::where('jenis_kategori', $jenis)->get();
+        return response()->json($kategories);
     }
 
     // Menampilkan form untuk membuat kategori baru
@@ -32,7 +52,7 @@ class KategoriController extends Controller
         $request->validate([
             'jenis_kategori' => 'required|in:pemasukan,pengeluaran',
             'nama_kategori' => 'required|string|max:255',
-            'is_pengiriman'=>'sometimes|nullable',
+            'is_pengiriman' => 'sometimes|nullable',
             'deskripsi' => 'required|string',
         ]);
 
@@ -58,28 +78,37 @@ class KategoriController extends Controller
         return view('admin.kategori.edit', compact('kategori')); // Menampilkan view form edit kategori
     }
 
+    //show
+    public function show($id)
+    {
+        $kategori = KategoriModel::findOrFail($id);
+        return view('admin.kategori.show', compact('kategori'));
+    }
+
+
+
     // Memperbarui kategori
     public function update(Request $request, $id)
-{
-    // Validasi input, batasi jenis_kategori hanya boleh 'Masuk' atau 'Keluar'
-    $validated = $request->validate([
-        'nama_kategori' => 'required',
-        'jenis_kategori' => 'required|in:pemasukan,pengeluaran',
-        'deskripsi' => 'nullable',
-        'is_pengiriman' => 'nullable|boolean',
-    ]);
+    {
+        // Validasi input, batasi jenis_kategori hanya boleh 'Masuk' atau 'Keluar'
+        $validated = $request->validate([
+            'nama_kategori' => 'required',
+            'jenis_kategori' => 'required|in:pemasukan,pengeluaran',
+            'deskripsi' => 'nullable',
+            'is_pengiriman' => 'nullable|boolean',
+        ]);
 
-    $kategori = KategoriModel::findOrFail($id);
+        $kategori = KategoriModel::findOrFail($id);
 
-    // Simpan data ke model
-    $kategori->nama_kategori = $validated['nama_kategori'];
-    $kategori->jenis_kategori = $validated['jenis_kategori'];
-    $kategori->deskripsi = $validated['deskripsi'] ?? null;
-    $kategori->is_pengiriman = $validated['is_pengiriman'] ?? false;
-    $kategori->save();
+        // Simpan data ke model
+        $kategori->nama_kategori = $validated['nama_kategori'];
+        $kategori->jenis_kategori = $validated['jenis_kategori'];
+        $kategori->deskripsi = $validated['deskripsi'] ?? null;
+        $kategori->is_pengiriman = $validated['is_pengiriman'] ?? false;
+        $kategori->save();
 
-    return redirect()->route('kategori')->with('success', 'Kategori berhasil diperbarui');
-}
+        return redirect()->route('kategori')->with('success', 'Kategori berhasil diperbarui');
+    }
 
 
     // Menghapus kategori

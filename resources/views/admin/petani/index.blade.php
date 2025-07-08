@@ -1,4 +1,5 @@
 @extends('layouting.guest.master')
+@section('title', 'Petani')
 
 @section('content')
 <div class="page-header">
@@ -65,8 +66,8 @@
                                         <i class="dw dw-delete-3"></i> Delete
                                     </button>
                                 </form>
-                                <a class="dropdown-item" href="{{ route('petani.detail', $item->id) }}">
-                                    <i class="dw dw-eye"></i> View
+                                <a class="dropdown-item" href="{{ route('petani.show', $item->id) }}">
+                                    <i class="dw dw-eye"></i> Detail
                                 </a>
 
                             </div>

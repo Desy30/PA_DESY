@@ -18,7 +18,6 @@ class PksSeeder extends Seeder
                 'nama_pks' => 'Pks 1',
                 'nomor_telepon_pks' => '08123456789',
                 'alamat_pks' => 'Jl. Contoh 1',
-                'tanda_tangan_pks' => 'Tanda Tangan Pks 1',
             ]
         ];
         foreach ($datas as $data) {
@@ -26,7 +25,6 @@ class PksSeeder extends Seeder
                 'nama_pks' => $data['nama_pks'],
                 'nomor_telepon_pks' => $data['nomor_telepon_pks'],
                 'alamat_pks' => $data['alamat_pks'],
-                'tanda_tangan_pks' => $data['tanda_tangan_pks'],
             ]);
         }
     }

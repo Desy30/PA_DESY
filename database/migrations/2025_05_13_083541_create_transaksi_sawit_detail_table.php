@@ -15,13 +15,14 @@ return new class extends Migration
             $table->uuid('id')->primary()->unique();
             $table->uuid('id_transaksi')->nullable();
             $table->double('bruto')->nullable();
-            $table->double('potongan')->nullable();
             $table->double('tara')->nullable();
+            $table->double('netto')->nullable();
+            $table->double('potongan')->nullable();
             $table->double('berat_bersih')->nullable();
             $table->double('harga')->nullable();
-            $table->double('netto')->nullable();
             $table->string('surat_pengantar')->nullable();
             $table->string('BON')->nullable();
+            $table->string('status_pengiriman')->default('Belum Terkirim');
             $table->timestamps();
             $table->foreign('id_transaksi')->references('id')->on('transaksi');
         });
