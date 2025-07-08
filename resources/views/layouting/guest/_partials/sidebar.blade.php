@@ -12,7 +12,7 @@
         <div class="sidebar-menu">
             <ul id="accordion-menu">
                 <li>
-                    <a href="{{ route('dashboard') }}" class="dropdown-toggle no-arrow">
+                    <a href="{{ route('dashboard') }}" class="dropdown-toggle no-arrow {{ isRouteActive('dashboard') }}">
                         <i class="micon dw dw-analytics-10" aria-hidden="true"></i>
                         <span class="mtext">Dashboard</span>
                     </a>
@@ -42,7 +42,7 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('dokumentasi') }}" class="dropdown-toggle no-arrow">
+                    <a href="{{ route('dokumentasi') }}" class="dropdown-toggle no-arrow {{ isRouteActive('dokumentasi') }}">
                         <i class="micon fa fa-folder-open" aria-hidden="true"></i>
                         <span class="mtext">Dokumentasi Surat</span>
                     </a>
