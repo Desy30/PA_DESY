@@ -1,4 +1,5 @@
 @extends('layouting.guest.master')
+@section('title', 'Tambah PKS')
 
 @section('content')
     <div class="page-header">
@@ -44,13 +45,6 @@
                         <label for="nomor_telepon_pks">Nomor Telepon</label>
                         <input type="tel" class="form-control" id="nomor_telepon-_pks" placeholder="Masukkan nomor HP pks.." name="nomor_telepon_pks" required>
                         @error('nomor_telepon_pks')
-                        <div class="alert alert-danger mt-1">{{ $message }}</div>
-                    @enderror
-                    </div>
-                    <div class="form-group">
-                        <label for="tanda_tangan_pks">Tanda Tangan</label>
-                        <input type="file" class="form-control-file" id="tanda_tangan_pks" name="tanda_tangan_pks" required>
-                        @error('tanda_tangan_pks')
                         <div class="alert alert-danger mt-1">{{ $message }}</div>
                     @enderror
                     </div>

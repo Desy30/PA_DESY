@@ -1,5 +1,7 @@
 @extends('layouting.guest.master')
 
+@section('title', 'pks')
+
 @section('content')
     <div class="page-header">
         <div class="title">
@@ -65,9 +67,10 @@
                                                 <i class="dw dw-delete-3"></i> Delete
                                             </button>
                                         </form>
-                                        <a class="dropdown-item" href="#">
-                                            <i class="dw dw-eye"></i> View
+                                        <a class="dropdown-item" href="{{ route('pks.show', $item->id) }}">
+                                            <i class="dw dw-eye"></i> Detail
                                         </a>
+
                                     </div>
                                 </div>
                             </td>

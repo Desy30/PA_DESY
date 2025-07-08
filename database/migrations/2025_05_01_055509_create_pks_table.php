@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('nama_pks');
             $table->string('nomor_telepon_pks');
             $table->string('alamat_pks');
-            $table->string('tanda_tangan_pks');
             $table->timestamps();
 
         });

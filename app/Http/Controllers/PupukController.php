@@ -89,6 +89,12 @@ class PupukController extends Controller
             return redirect()->back()->with('error', 'Data gagal diperbarui!')->withInput();
         }
     }
+    //melihat show
+    public function show($id)
+    {
+        $pupuk = SupplierPupukModel::findOrFail($id);
+        return view('admin.pupuk.show', compact('pupuk'));
+    }
 
     // Menghapus data pupuk
     public function destroy($id)

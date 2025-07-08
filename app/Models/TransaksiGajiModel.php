@@ -11,17 +11,16 @@ class TransaksiGajiModel extends Model
 {
     use HasUuids;
 
-    protected $table = 'transaksi_gaji';
+    protected $table = 'transaksi_gaji_detail';
 
     protected $primaryKey = 'id';
 
     protected $fillable =[
         'id_transaksi',
         'id_karyawan',
-        'jumlah_gaji',
         'periode',
         'tunjangan',
-        'potongan',
+        'potongan_gaji',
         'keterangan'
     ];
     public function transaksi()

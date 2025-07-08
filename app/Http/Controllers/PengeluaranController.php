@@ -9,9 +9,11 @@ use App\Models\KategoriModel;
 use App\Models\TransaksiModel;
 use App\Models\TransaksiGajiModel;
 use App\Models\TransaksiSawitModel;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 use App\Models\TransaksiKendaraanOperasionalModel;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class PengeluaranController extends Controller
 {
@@ -62,32 +64,56 @@ class PengeluaranController extends Controller
             $request->validate([
                 'id_petani' => 'required',
                 'tanggal_sawit' => 'required',
-                'total_sawit' => 'required',
+                'bruto' => 'required',
+                'tara' => 'required',
+                'jenis_potongan' => 'required',
+                'harga_per_kg' => 'required',
                 'metode_pembayaran_sawit' => 'required',
                 'bukti_transaksi_sawit' => 'required',
-                'bruto' => 'required',
-                'potongan_sawit' => 'required',
-                'berat_bersih' => 'required',
-                'harga' => 'required',
-                'netto' => 'required',
+
             ], [
                 'id_petani.required' => 'Petani harus diisi.',
                 'tanggal_sawit.required' => 'Tanggal harus diisi.',
-                'total_sawit.required' => 'Total harus diisi.',
+                'bruto.required' => 'Bruto harus diisi.',
+                'tara.required' => 'Tara harus diisi.',
+                'jenis_potongan.required' => 'Jenis potongan harus diisi.',
+                'harga_per_kg.required' => 'Harga per kg harus diisi.',
                 'metode_pembayaran_sawit.required' => 'Metode pembayaran harus diisi.',
                 'bukti_transaksi_sawit.required' => 'Bukti transaksi harus diisi.',
-                'bruto.required' => 'Bruto harus diisi.',
-                'potongan_sawit.required' => 'Potongan harus diisi.',
-                'berat_bersih.required' => 'Berat bersih harus diisi.',
-                'harga.required' => 'Harga harus diisi.',
-                'netto.required' => 'Netto harus diisi.',
             ]);
+
+            // Ambil nilai dari request
+            $bruto = (int) $request->input('bruto');
+            $tara = (int) $request->input('tara');
+            $jenisPotongan = $request->input('jenis_potongan');
+            $potongan = (int) $request->input('potongan_sawit');
+            $hargaPerKg = (int) $request->input('harga_per_kg');
+
+            // 1. Hitung Netto
+            $netto = $bruto - $tara;
+
+            // 2. Hitung Jumlah Potongan
+            if ($jenisPotongan === 'persentase') {
+                $jumlahAkhirPotongan = $netto - ($netto * $potongan / 100);
+            } else {
+                $jumlahAkhirPotongan = $netto - $potongan;
+            }
+
+            // 3. Bulatkan nilai potongan
+            $jumlahPotongan = round($netto - $jumlahAkhirPotongan);
+
+            // 4. Hitung Berat Bersih
+            $beratBersih = round($netto - $jumlahPotongan);
+
+            // 5. Hitung Harga Total
+            $hargaTotal = $beratBersih * $hargaPerKg;
+
 
             //transaksi
             $transaksi = TransaksiModel::create([
                 'id_petani' => $request->id_petani,
                 'tanggal' => $request->tanggal_sawit,
-                'total' => $request->total_sawit,
+                'total' => $hargaTotal,
                 'metode_pembayaran' => $request->metode_pembayaran_sawit,
                 'bukti_transaksi' => $request->bukti_transaksi_sawit,
                 'id_kategori' => $request->id_kategori
@@ -102,14 +128,16 @@ class PengeluaranController extends Controller
             //TransaksiSawit
             TransaksiSawitModel::create([
                 'bruto' => $request->bruto,
-                'potongan' => $request->potongan_sawit,
-                'berat_bersih' => $request->berat_bersih,
-                'harga' => $request->harga,
-                'netto' => $request->netto,
+                'tara' => $request->tara,
+                'netto' => $netto,
+                'potongan' => $potongan,
+                'jumlah_potongan' => $jumlahPotongan,
+                'berat_bersih' => $beratBersih,
+                'harga' => $request->harga_per_kg,
                 'id_transaksi' => $transaksi->id
             ]);
 
-            return redirect()->route('pengeluaran')->with('success', 'Data pengeluaran berhasil disimpan!');
+            return redirect()->route('pengeluaran.invoice', $transaksi->id)->with('success', 'Data pengeluaran berhasil disimpan!');
         } catch (ValidationException $th) {
             return redirect()->back()->withErrors($th->validator)->withInput();
         }
@@ -205,8 +233,9 @@ class PengeluaranController extends Controller
                 'id_karyawan' => $request->id_karyawan,
                 'periode' => $request->periode,
                 'tunjangan' => $request->tunjangan,
-                'potongan' => $request->potongan_gaji,
+                'potongan_gaji' => $request->potongan_gaji,
                 'id_transaksi' => $transaksi->id
+
             ]);
 
             return redirect()->route('pengeluaran')->with('success', 'Data pengeluaran berhasil disimpan!');
@@ -251,8 +280,26 @@ class PengeluaranController extends Controller
         return view('admin.pengeluaran.edit');
     }
 
-    public function detail($id)
+    public function show($id)
     {
-        return view('admin.pengeluaran.detail');
+        return view('admin.pengeluaran.show');
     }
+    public function cetakInvoice($id)
+    {
+        $transaksi = TransaksiModel::with(['kategori', 'transaksiSawit', 'petani'])->findOrFail($id);
+
+        return Pdf::loadView('admin.pengeluaran.invoice', compact('transaksi'))
+            ->setPaper([0, 0, 164.4, 400], 'portrait') // 58mm x 141mm (ukuran bon kecil)
+            ->setOptions([
+                'margin-top' => 0,
+                'margin-right' => 0,
+                'margin-bottom' => 0,
+                'margin-left' => 0,
+                'dpi' => 203,
+                'enable-smart-shrinking' => false
+            ])
+            ->stream('bon-sawit.pdf');
+    }
+
+
 }

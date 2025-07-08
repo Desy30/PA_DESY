@@ -1,4 +1,6 @@
 @extends('layouting.guest.master')
+@section('title', 'Tambah Petani')
+
 
 @section('content')
     <div class="page-header">
@@ -43,10 +45,6 @@
                     <label for="nomor_telepon">Nomor Telepon</label>
                     <input type="tel" class="form-control" id="nomor_telepon"
                         placeholder="Masukkan nomor telepon petani..." name="nomor_telepon_petani" required>
-                </div>
-                <div class="form-group">
-                    <label for="tanda_tangan_petani">Tanda Tangan</label>
-                    <input type="file" class="form-control-file" id="tanda_tangan_petani" name="tanda_tangan_petani" required>
                 </div>
                 <div class="form-group">
                     <label for="nomor_rekening">Nomor Rekening</label>

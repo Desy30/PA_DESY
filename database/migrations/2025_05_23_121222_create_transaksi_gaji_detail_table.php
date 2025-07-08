@@ -15,11 +15,9 @@ return new class extends Migration
             $table->uuid('id')->primary()->unique();
             $table->uuid('id_transaksi');
             $table->uuid('id_karyawan');
-            $table->double('jumlah_gaji')->nullable();
-            $table->double('total_gaji')->nullable();
             $table->date('periode');
             $table->double('tunjangan')->nullable();
-            $table->double('potongan');
+            $table->double('potongan_gaji');
             $table->text('keterangan')->nullable();
             $table->foreign(columns: 'id_transaksi')->references('id')->on('transaksi');
             $table->foreign(columns: 'id_karyawan')->references('id')->on('karyawan');

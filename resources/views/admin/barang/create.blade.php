@@ -1,5 +1,5 @@
 @extends('layouting.guest.master')
-
+@section('title', 'Tambah Data Barang')
 @section('content')
 <div class="page-header">
     <div class="title">

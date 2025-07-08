@@ -1,4 +1,6 @@
 @extends('layouting.guest.master')
+@section('title', 'Tambah Supplier')
+
 
 @section('content')
     <div class="page-header">

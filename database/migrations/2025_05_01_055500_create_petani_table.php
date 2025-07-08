@@ -17,7 +17,6 @@ return new class extends Migration
             $table->string('nomor_telepon_petani');
             $table->string('alamat_petani');
             $table->string('nomor_rekening_petani');
-            $table->string('tanda_tangan_petani');
             $table->timestamps();
         });
     }

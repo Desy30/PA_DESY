@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokumentasiController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\KategoriController;
@@ -22,6 +23,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function () {
     Route::post('logout', action: [LoginController::class, 'logout'])->name('logout');
 
+    Route::prefix("dashboard")->group(function () {
+        Route::get('', [DashboardController::class, 'index'])->name('dashboard');
+    });
+
     Route::prefix("petani")->group(function () {
         Route::get('', [PetaniController::class, 'index'])->name('petani');
         Route::get('create', [PetaniController::class, 'create'])->name('petani.create');
@@ -30,7 +35,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/petani/{id}/edit', [PetaniController::class, 'edit'])->name('petani.edit');
         // Route untuk update data petani (PUT)
         Route::put('/petani/{id}', [PetaniController::class, 'update'])->name('petani.update');
-        Route::get('/petani/{id}', [PetaniController::class, 'detail'])->name('petani.detail');
+        Route::get('/petani/{id}', [PetaniController::class, 'show'])->name('petani.show');
         Route::delete('/petani/{id}', [PetaniController::class, 'destroy'])->name('petani.destroy');
     });
 
@@ -43,6 +48,8 @@ Route::middleware('auth')->group(function () {
         Route::get('{id}/edit', [PksController::class, 'edit'])->name('pks.edit');
         // Route untuk update data pks (PUT)
         Route::put('{id}', [PksController::class, 'update'])->name('pks.update');
+        //Route untuk melihat show data yang diinput
+        Route::get('/pks/{id}', [PksController::class, 'show'])->name('pks.show');
         // Route untuk menghapus data pks (DELETE)
         Route::delete('{id}', [PksController::class, 'destroy'])->name('pks.destroy');
     });
@@ -55,6 +62,7 @@ Route::middleware('auth')->group(function () {
         Route::post('store', [PupukController::class, 'store'])->name('pupuk.store');
         Route::get('{id}/edit', [PupukController::class, 'edit'])->name('pupuk.edit');
         Route::put('{id}', [PupukController::class, 'update'])->name('pupuk.update');
+        Route::get('/pupuk/{id}', [PupukController::class, 'show'])->name('pupuk.show');
         Route::delete('{id}', [PupukController::class, 'destroy'])->name('pupuk.destroy'); // DELETE route
     });
 
@@ -72,8 +80,8 @@ Route::middleware('auth')->group(function () {
         // Menampilkan form untuk mengedit barang
         Route::get('{id}/edit', [BarangController::class, 'edit'])->name('barang.edit');
 
-        // Menampilkan detail barang
-        Route::get('{id}/detail', [BarangController::class, 'detail'])->name('barang.detail');
+        // Menampilkan show barang
+        Route::get('{id}/show', [BarangController::class, 'show'])->name('barang.show');
 
         // Memperbarui data barang
         Route::put('{id}', [BarangController::class, 'update'])->name('barang.update');
@@ -88,7 +96,7 @@ Route::middleware('auth')->group(function () {
         Route::get('', [PemasukanController::class, 'index'])->name('pemasukan');
         Route::get('create', [PemasukanController::class, 'create'])->name('pemasukan.create');
         Route::get('{id}/edit', [PemasukanController::class, 'edit'])->name('pemasukan.edit');
-        Route::get('{id}/detail', [PemasukanController::class, 'detail'])->name('pemasukan.detail');
+        Route::get('{id}/show', [PemasukanController::class, 'show'])->name('pemasukan.show');
         Route::post('store', [PemasukanController::class, 'store'])->name('pemasukan.store');
     });
 
@@ -96,9 +104,9 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('pengeluaran')->group(function () {
         Route::get('', [PengeluaranController::class, 'index'])->name('pengeluaran');
-        Route::get('create', [PengeluaranController::class, 'create'])->name('pengeluaran.create');
+        Route::get('create', [PengeluaranController::class, 'create'])->name('pengeluaran.create')->middleware('role:kasir');
         Route::get('{id}/edit', [PengeluaranController::class, 'edit'])->name('pengeluaran.edit');
-        Route::get('{id}/detail', [PengeluaranController::class, 'detail'])->name('pengeluaran.detail');
+        Route::get('{id}/show', [PengeluaranController::class, 'show'])->name('pengeluaran.show');
         Route::post('store', [PengeluaranController::class, 'store'])->name('pengeluaran.store');
     });
     Route::prefix('laporan')->group(function () {
@@ -108,7 +116,9 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('kategori')->group(function () {
         Route::get('', [KategoriController::class, 'index'])->name('kategori');
+        Route::get('/kategori/{id}/show', [KategoriController::class, 'show'])->name('kategori.show');
 
+        Route::get('get-by-jenis', [KategoriController::class, 'getByJenis'])->name('kategori.get-by-jenis');
         Route::get('create', [KategoriController::class, 'create'])->name('kategori.create');
         Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
         Route::get('{id}/edit', [KategoriController::class, 'edit'])->name('kategori.edit');
@@ -140,12 +150,21 @@ Route::middleware('auth')->group(function () {
 
     Route::prefix('pengiriman')->group(function () {
         Route::get('/', [PengirimanController::class, 'index'])->name('pengiriman');
-        Route::get('/create', [PengirimanController::class, 'create'])->name('pengiriman.create');
-        Route::post('/', [PengirimanController::class, 'store'])->name('pengiriman.store');
+        Route::get('/{id}/edit', [PengirimanController::class, 'edit'])->name('pengiriman.edit');
+        Route::put('/pengiriman/{id}', [PengirimanController::class, 'update'])->name('pengiriman.update');
+        Route::put('/update/show/{id}', [PengirimanController::class, 'updateshow'])->name('pengiriman.show.update');
     });
 });
 
 Route::middleware('guest')->group(function () {
     Route::get('', [LoginController::class, 'loginPage'])->name('login');
     Route::post('login', [LoginController::class, 'login'])->name('login.process');
+});
+Route::middleware('auth')->group(function () {
+    Route::get('/pengeluaran/invoice/{id}', [PengeluaranController::class, 'cetakInvoice'])->name('pengeluaran.invoice');
+});
+
+Route::middleware('auth')->group(function () {
+    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
+    Route::get('/laporan/export', [LaporanController::class, 'exportPdf'])->name('laporan.export.pdf');
 });

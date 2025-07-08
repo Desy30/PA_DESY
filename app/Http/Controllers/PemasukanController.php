@@ -21,8 +21,6 @@ class PemasukanController extends Controller
     {
         // Ambil data pemasukan dengan relasi kategori yang jenis_kategorinya adalah 'pemasukan'
         $pemasukans = TransaksiModel::with('kategori')->get();
-
-
         // Kirim data pemasukans ke view
         return view('admin.pemasukan.index', compact('pemasukans'));
     }
@@ -71,18 +69,13 @@ class PemasukanController extends Controller
                 'sumber_pemasukan' => 'required',
                 'surat_pengantar' => 'required',
                 'metode_pembayaran' => 'required',
-                'bon' => 'required',
-                'total_sawit' => 'required',
             ], [
                 'tanggal_sawit.required' => 'Tanggal harus diisi.',
                 'berat_bersih.required' => 'Berat bersih harus diisi.',
                 'id_pks.required' => 'ID PKS harus diisi.',
+                'sumber_pemasukan.required' => 'Sumber pemasukan harus diisi.',
                 'surat_pengantar.required' => 'Surat pengantar harus diisi.',
                 'metode_pembayaran.required' => 'Metode pembayaran harus diisi.',
-                'bon.required' => 'bon harus diisi.',
-                'total_sawit.required' => 'Total harus diisi.',
-                'status.required' => 'Status harus diisi.',
-
             ]);
 
             // Transaksi
@@ -91,29 +84,24 @@ class PemasukanController extends Controller
                 'id_pks' => $request->id_pks,
                 'sumber_pemasukan' => $request->sumber_pemasukan,
                 'metode_pembayaran' => $request->metode_pembayaran,
-                'total' => $request->total_sawit,
-                'status' => 'proses',
-                'id_kategori' => $request->id_kategori
+                'total' => 0,
+                'id_kategori' => $request->id_kategori,
+                'status_pengiriman' => 'dikirim'
             ]);
 
             $suratPengantar = $request->file('surat_pengantar');
-            $bon = $request->file('bon');
 
             $namaFileSuratPengantar = 'surat-pengantar-' . time() . '.' . $suratPengantar->getClientOriginalExtension();
-
-            $namaFileBon = 'BON-' . time() . '.' . $bon->getClientOriginalExtension();
-
-            // Sawit Detail
+            // Sawit show
             $transaksiSawit = TransaksiSawitModel::create([
                 'berat_bersih' => $request->berat_bersih,
                 'surat_pengantar' => $namaFileSuratPengantar,
-                'bon' => $namaFileBon,
+                'status_pengiriman' => $request->status_pengiriman,
                 'id_transaksi' => $transaksi->id
             ]);
 
             if ($transaksiSawit) {
                 Storage::putFileAs('surat-pengantar', $suratPengantar, $namaFileSuratPengantar);
-                Storage::putFileAs('BON', $bon, $namaFileBon);
             }
 
 
@@ -263,8 +251,8 @@ class PemasukanController extends Controller
         return view('admin.pemasukan.edit');
     }
 
-    public function detail($id)
+    public function show($id)
     {
-        return view('admin.pemasukan.detail');
+        return view('admin.pemasukan.show');
     }
 }

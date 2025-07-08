@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\TransaksiSawitModel;
 
 class TransaksiModel extends Model
 {
@@ -22,7 +23,7 @@ class TransaksiModel extends Model
         'total',
         'tanggal',
         'metode_pembayaran',
-        'status',
+        'status_pengiriman',
         'bukti_transaksi',
         'keterangan'
     ];
@@ -47,6 +48,10 @@ class TransaksiModel extends Model
 
     public function user () {
         return $this->belongsTo(User::class, 'id_user');
+    }
+    public function transaksiSawit()
+    {
+        return $this->hasOne(TransaksiSawitModel::class, 'id_transaksi');
     }
 
 }

@@ -18,7 +18,6 @@ class PetaniModel extends Model
         'nomor_telepon_petani',
         'alamat_petani',
         'nomor_rekening_petani',
-        'tanda_tangan_petani'
     ];
 
 }

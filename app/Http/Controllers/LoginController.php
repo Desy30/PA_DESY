@@ -6,7 +6,6 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 
 class LoginController extends Controller
@@ -25,7 +24,7 @@ class LoginController extends Controller
 
             $user = Auth::user();
 
-            
+
             if ($user->hasRole('pemilik')) {
                 return redirect()->route('pengguna');
             } elseif ($user->hasRole('kasir')) {

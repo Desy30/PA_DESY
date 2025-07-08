@@ -24,14 +24,14 @@ class BarangController extends Controller
         return view('admin.barang.index', compact('barangs'));
     }
 
-    // Menampilkan detail barang
-    public function detail($id)
+    // Menampilkan show barang
+    public function show($id)
     {
         // Mencari data barang berdasarkan ID
         $barang = BarangModel::findOrFail($id);
 
-        // Menampilkan halaman detail dan mengirimkan data barang
-        return view('admin.barang.detail', compact('barang'));
+        // Menampilkan halaman show dan mengirimkan data barang
+        return view('admin.barang.show', compact('barang'));
     }
 
     public function create()

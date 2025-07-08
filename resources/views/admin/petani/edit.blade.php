@@ -1,4 +1,6 @@
 @extends('layouting.guest.master')
+@section('title', 'Edit Petani')
+
 
 @section('content')
     <div class="page-header">
@@ -26,15 +28,6 @@
                     <input type="text" class="form-control" id="nama_petani" name="nama_petani"
                         value="{{ old('nama_petani', $petani->nama_petani) }}" required>
                     @error('nama_petani')
-                        <div class="alert alert-danger mt-1">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <!-- Tanda Tangan Petani -->
-                <div class="form-group">
-                    <label for="tanda_tangan_petani">Tanda Tangan Petani</label>
-                    <input type="file" class="form-control" id="tanda_tangan_petani" name="tanda_tangan_petani">
-                    @error('tanda_tangan_petani')
                         <div class="alert alert-danger mt-1">{{ $message }}</div>
                     @enderror
                 </div>
