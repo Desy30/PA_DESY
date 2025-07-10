@@ -90,7 +90,7 @@
                             <div class="form-group">
                                 <label for="surat_pengantar">Surat Pengantar</label>
                                 <input type="file" class="form-control" id="surat_pengantar" name="surat_pengantar"
-                                    value="{{ old('surat_pengantar') }}">
+                                    accept="image/*,application/pdf">
                             </div>
                         </div>
                     </div>
@@ -170,6 +170,7 @@
                         <label for="bukti_transaksi_pupuk">Bukti Transaksi</label>
                         <input type="file" class="form-control" id="bukti_transaksi_pupuk"
                             name="bukti_transaksi_pupuk" accept="image/*,application/pdf">
+
                     </div>
                 </div>
 
@@ -214,8 +215,9 @@
                     <!-- Bukti Pembayaran -->
                     <div class="form-group">
                         <label for="bukti_transaksi_timbangan">Bukti Pembayaran</label>
-                        <input type="file" class="form-control-file" id="bukti_transaksi_timbangan"
+                        <input type="file" class="form-control" id="bukti_transaksi_timbangan"
                             name="bukti_transaksi_timbangan" accept="image/*,application/pdf">
+
                     </div>
                 </div>
                 {{-- Default --}}
@@ -240,7 +242,8 @@
                             <div class="form-group">
                                 <label for="bukti_transaksi_default">Bukti Transaksi</label>
                                 <input type="file" class="form-control" id="bukti_transaksi_default"
-                                    name="bukti_transaksi_default" accept="image/*">
+                                    name="bukti_transaksi_default" accept="image/*,application/pdf">
+
                             </div>
                         </div>
                         <div class="col-12 col-md-6">

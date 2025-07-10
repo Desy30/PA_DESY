@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    <div class="pre-loader">
+    {{-- <div class="pre-loader">
         <div class="pre-loader-box">
             <div class="loader-logo"><img src="{{ asset('assets/guest/images/logo.png') }}" alt="" width="300"
                     height="300"></div>
@@ -19,7 +19,7 @@
                 Loading...
             </div>
         </div>
-    </div>
+    </div> --}}
 
 
     <div class="main-container">

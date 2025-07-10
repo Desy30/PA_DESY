@@ -13,37 +13,42 @@ class DokumentasiController extends Controller
 
     public function index(Request $request)
     {
-        $kategori = $request->jenis_surat;
-        $files = collect();
+        $transaksi = TransaksiModel::with('kategori', 'transaksiSawit')->get();
 
-        // Ambil dari tabel transaksi
-        if (!$kategori || $kategori === 'transaksi') {
-            $transaksi = TransaksiModel::whereNotNull('bukti_transaksi')->get()->map(function ($item) {
-                return (object)[
-                    'kategori' => 'Transaksi',
-                    'bukti_transaksi' => $item->bukti_transaksi,
-                ];
-            });
-            $files = $files->merge($transaksi);
+        $dokumentasi = [];
+
+        foreach ($transaksi as $item) {
+            $kategori = strtolower($item->kategori->nama_kategori ?? '');
+
+            $row = [
+                'kategori' => $item->kategori->nama_kategori ?? '-',
+                'total' => $item->total ?? '-',
+                'tanggal' => $item->tanggal ?? '-',
+                'BON' => null,
+                'bukti_transaksi' => null,
+                'surat_pengantar' => null,
+            ];
+
+            // BON berdasarkan kategori
+            if ($kategori === 'pupuk') {
+                $row['BON'] = $item->BON ? 'storage/BON/' . $item->BON : null;
+            } elseif ($kategori === 'penjualan sawit') {
+                $row['BON'] = $item->transaksiSawit->BON ?? null
+                    ? 'storage/BON/' . $item->transaksiSawit->BON
+                    : null;
+            }
+
+            // Selalu panggil bukti_transaksi jika ada
+            $row['bukti_transaksi'] = $item->bukti_transaksi ? 'storage/bukti_transaksi/' . $item->bukti_transaksi : null;
+
+            // Tambahkan surat pengantar
+            $row['surat_pengantar'] = $item->surat_pengantar ? 'storage/surat_pengantar/' . $item->surat_pengantar : null;
+
+            $dokumentasi[] = $row;
         }
 
-        if (!$kategori || $kategori === 'sawit') {
-            $sawit = TransaksiSawitModel::whereNotNull('surat_pengantar')
-                ->where('surat_pengantar', '!=', 'BON')
-                ->get()
-                ->map(function ($item) {
-                return (object)[
-                    'kategori' => 'Sawit',
-                    'surat_pengantar' => $item->surat_pengantar,
-                    'BON' => $item->BON,
-                ];
-            });
-            $files = $files->merge($sawit);
-        }
-
-        return view('admin.dokumentasi.index', [
-            'files' => $files,
-            'kategori_terpilih' => $kategori,
-        ]);
+        return view('admin.dokumentasi.index', compact('dokumentasi'));
     }
+
+
 }

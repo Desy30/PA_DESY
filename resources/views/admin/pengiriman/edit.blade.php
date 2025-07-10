@@ -27,7 +27,7 @@
 
     <div class="card">
         <div class="card-body">
-            <form action="{{ route('pengiriman.detail.update', $pengiriman->id) }}" method="POST"
+            <form action="{{ route('pengiriman.updateShow', $pengiriman->id) }}" method="POST"
                 enctype="multipart/form-data">
                 @csrf
                 @method('PUT')

@@ -13,12 +13,12 @@ class TransaksiModel extends Model
     protected $table = 'transaksi';
 
     protected $fillable = [
-        'id',
         'id_petani',
         'id_pks',
         'id_supplier',
         'id_kategori',
         'id_barang',
+        'id_karyawan',
         'id_user',
         'total',
         'tanggal',
@@ -53,5 +53,39 @@ class TransaksiModel extends Model
     {
         return $this->hasOne(TransaksiSawitModel::class, 'id_transaksi');
     }
+    public function barang()
+    {
+        return $this->belongsTo(BarangModel::class, 'id_barang');
+    }
+    public function transaksiPupuk()
+    {
+        return $this->hasOne(TransaksiPupukModel::class, 'id_transaksi');
+    }
+
+    public function transaksiGaji()
+    {
+        return $this->hasOne(TransaksiGajiModel::class, 'id_transaksi');
+    }
+
+    public function transaksiTimbangan()
+    {
+        return $this->hasOne(TransaksiTimbanganModel::class, 'id_transaksi');
+    }
+
+    public function transaksiKendaraanOperasional()
+    {
+        return $this->hasOne(TransaksiKendaraanOperasionalModel::class, 'id_transaksi');
+    }
+
+    public function transaksiItem()
+    {
+        return $this->hasOne(TransaksiItemModel::class, 'id_transaksi');
+    }
+    public function karyawan()
+    {
+        return $this->belongsTo(KaryawanModel::class, 'id_karyawan');
+    }
 
 }
+
+

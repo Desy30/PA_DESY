@@ -29,4 +29,8 @@ class TransaksiSawitModel extends Model
     {
         return $this->belongsTo(TransaksiModel::class, 'id_transaksi', 'id');
     }
+    public function petani()
+    {
+        return $this->belongsTo(PetaniModel::class, 'id_petani');
+    }
 }

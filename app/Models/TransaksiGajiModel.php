@@ -15,7 +15,7 @@ class TransaksiGajiModel extends Model
 
     protected $primaryKey = 'id';
 
-    protected $fillable =[
+    protected $fillable = [
         'id_transaksi',
         'id_karyawan',
         'periode',

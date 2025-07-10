@@ -151,8 +151,8 @@ Route::middleware('auth')->group(function () {
     Route::prefix('pengiriman')->group(function () {
         Route::get('/', [PengirimanController::class, 'index'])->name('pengiriman');
         Route::get('/{id}/edit', [PengirimanController::class, 'edit'])->name('pengiriman.edit');
-        Route::put('/pengiriman/{id}', [PengirimanController::class, 'update'])->name('pengiriman.update');
-        Route::put('/update/show/{id}', [PengirimanController::class, 'updateshow'])->name('pengiriman.show.update');
+        Route::put('/{id}', [PengirimanController::class, 'update'])->name('pengiriman.update');
+        Route::put('/update/show/{id}', [PengirimanController::class, 'updateShow'])->name('pengiriman.updateShow');
     });
 });
 

@@ -62,9 +62,6 @@
                                         <a class="dropdown-item" href="{{ route('pengeluaran.show', $item->id) }}">
                                             <i class="dw dw-eye"></i> Detail
                                         </a>
-                                        <a class="dropdown-item" href="{{ route('pengeluaran.edit', $item->id) }}">
-                                            <i class="dw dw-edit2"></i> Edit
-                                        </a>
                                     </div>
                                 </div>
                             </td>

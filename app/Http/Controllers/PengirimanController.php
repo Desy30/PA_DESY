@@ -31,7 +31,7 @@ class PengirimanController extends Controller
         return view('admin.pengiriman.edit', compact('pengiriman'));
     }
 
-    public function updateDetail(Request $request, $id)
+    public function updateShow(Request $request, $id)
     {
         // dd($request->all());
         $request->validate([
@@ -42,7 +42,7 @@ class PengirimanController extends Controller
         $file = $request->file('bon');
         $fileName = time() . '.' . $file->getClientOriginalExtension();
 
-        Storage::putFileAs('public/BON', $file, $fileName);
+        Storage::putFileAs('BON', $file, $fileName);
 
         $transaksi = TransaksiModel::findOrFail($id);
         $transaksi->update([
