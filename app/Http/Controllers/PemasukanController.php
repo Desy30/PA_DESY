@@ -123,7 +123,7 @@ class PemasukanController extends Controller
             'id_transaksi' => $transaksi->id
         ]);
 
-        Storage::disk('public')->putFileAs('bukti_transaksi_pupuk', $file, $filename);
+        Storage::disk('public')->putFileAs('bukti-transaksi', $file, $filename);
 
         return redirect()->route('pemasukan')->with('success', 'Data pemasukan berhasil disimpan!');
     }
@@ -154,7 +154,7 @@ class PemasukanController extends Controller
             'nama' => $request->nama
         ]);
 
-        Storage::disk('public')->putFileAs('bukti_transaksi_timbangan', $file, $filename);
+        Storage::disk('public')->putFileAs('bukti-transaksi', $file, $filename);
 
         return redirect()->route('pemasukan')->with('success', 'Data pemasukan berhasil disimpan!');
     }
@@ -181,7 +181,7 @@ class PemasukanController extends Controller
             'id_kategori' => $request->id_kategori
         ]);
 
-        Storage::disk('public')->putFileAs('bukti_transaksi_default', $file, $filename);
+        Storage::disk('public')->putFileAs('bukti-transaksi', $file, $filename);
 
         return redirect()->route('pemasukan')->with('success', 'Data pemasukan berhasil disimpan!');
     }

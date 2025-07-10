@@ -1,6 +1,6 @@
 <div class="left-side-bar">
     <div class="brand-logo">
-        <a href="index.html">
+        <a href="">
             <img src="{{ asset('assets/guest/images/logo.png') }}" alt="Logo" class="light-logo" style="width: 150%; max-width: 230px; height: auto; margin-left: 7px; display: block;">
 
         </a>

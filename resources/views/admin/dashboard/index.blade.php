@@ -7,7 +7,6 @@
 
         <h4 class="mb-4 fw-bold">Dashboard</h4>
 
-        {{-- Ringkasan Data --}}
         <div class="row g-4 mb-4">
             <div class="col-md-4">
                 <div class="card shadow-sm border-0">
