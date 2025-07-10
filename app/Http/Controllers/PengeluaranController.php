@@ -113,7 +113,7 @@ class PengeluaranController extends Controller
 
             $fileSawit = $request->file('bukti_transaksi_sawit');
             $namaFileSawit = 'bukti_sawit_' . time() . '.' . $fileSawit->getClientOriginalExtension();
-            Storage::putFileAs('bukti_sawit', $fileSawit, $namaFileSawit);
+            Storage::putFileAs('bukti-transaksi', $fileSawit, $namaFileSawit);
             //transaksi
             $transaksi = TransaksiModel::create([
                 'id_petani' => $request->id_petani,
@@ -168,7 +168,7 @@ class PengeluaranController extends Controller
             $namaFileBuktiTransaksiKendaraan = 'bukti_transaksi_kendaraan-' . time() . '.' . $bukti_transaksi_kendaraan->getClientOriginalExtension();
 
             // Simpan ke folder storage/app/public/bukti_transaksi_kendaraan/
-            Storage::putFileAs('bukti_transaksi_kendaraan', $bukti_transaksi_kendaraan, $namaFileBuktiTransaksiKendaraan);
+            Storage::putFileAs('bukti-transaksi', $bukti_transaksi_kendaraan, $namaFileBuktiTransaksiKendaraan);
 
             //transaksi
             $transaksi = TransaksiModel::create([
@@ -218,7 +218,7 @@ class PengeluaranController extends Controller
 
                         $bukti_transaksi_gaji = $request->file('bukti_transaksi_gaji');
                         $namaFileBuktiTransaksiGaji = 'bukti-gaji-' . time() . '.' . $bukti_transaksi_gaji->getClientOriginalExtension();
-                        Storage::putFileAs('bukti_transaksi', $bukti_transaksi_gaji, $namaFileBuktiTransaksiGaji);
+                        Storage::putFileAs('bukti-transaksi', $bukti_transaksi_gaji, $namaFileBuktiTransaksiGaji);
             //transaksi
             $transaksi = TransaksiModel::create([
                 'tanggal' => $request->tanggal_gaji,
@@ -265,7 +265,7 @@ class PengeluaranController extends Controller
 
             $bukti_transaksi_default = $request->file('bukti_transaksi_default');
             $namaFileBuktiTransaksiDefault = 'bukti_transaksi_default-' . time() . '.' . $bukti_transaksi_default->getClientOriginalExtension();
-            Storage::putFileAs('bukti_transaksi_default', $bukti_transaksi_default, $namaFileBuktiTransaksiDefault);
+            Storage::putFileAs('bukti-transaksi', $bukti_transaksi_default, $namaFileBuktiTransaksiDefault);
 
             $transaksi = TransaksiModel::create([
                 'tanggal' => $request->tanggal_default,

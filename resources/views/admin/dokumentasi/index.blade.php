@@ -47,7 +47,7 @@
 
                             <td>
                                 @if (!empty($item['surat_pengantar']))
-                                    <a href="{{ asset('storage/surat-pengantar/' . ltrim($item['surat_pengantar'], '/')) }}" target="_blank"
+                                    <a href="{{ asset('storage/surat-pengantar/' . $item['surat_pengantar']) }}" target="_blank"
                                         class="btn btn-sm btn-outline-primary">
                                         <i class="dw dw-file"></i> Lihat
                                     </a>
@@ -58,7 +58,7 @@
 
                             <td>
                                 @if (!empty($item['BON']))
-                                    <a href="{{ asset('Storage/BON/' . ltrim($item['BON'], '/')) }}" target="_blank"
+                                    <a href="{{ asset('storage/BON/' . $item['BON']) }}" target="_blank"
                                         class="btn btn-sm btn-outline-success">
                                         <i class="dw dw-receipt"></i> Lihat
                                     </a>
@@ -69,7 +69,7 @@
 
                             <td>
                                 @if (!empty($item['bukti_transaksi']))
-                                    <a href="{{ asset('Storage/bukti_transaksi/' . ltrim($item['bukti_transaksi'], '/')) }}" target="_blank"
+                                    <a href="{{ asset('storage/bukti_transaksi/' . $item['bukti_transaksi']) }}" target="_blank"
                                         class="btn btn-sm btn-outline-danger">
                                         <i class="dw dw-checked"></i> Lihat
                                     </a>

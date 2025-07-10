@@ -13,12 +13,12 @@ class DokumentasiController extends Controller
 
     public function index(Request $request)
     {
-        $transaksi = TransaksiModel::with('kategori', 'transaksiSawit')->get();
+        $transaksi = TransaksiModel::with(['kategori', 'transaksiSawit'])->orderBy('tanggal', 'desc')->get();
 
         $dokumentasi = [];
 
         foreach ($transaksi as $item) {
-            $kategori = strtolower($item->kategori->nama_kategori ?? '');
+            $kategori = strtolower($item->kategori->tipe_form ?? '');
 
             $row = [
                 'kategori' => $item->kategori->nama_kategori ?? '-',
@@ -30,25 +30,18 @@ class DokumentasiController extends Controller
             ];
 
             // BON berdasarkan kategori
-            if ($kategori === 'pupuk') {
-                $row['BON'] = $item->BON ? 'storage/BON/' . $item->BON : null;
-            } elseif ($kategori === 'penjualan sawit') {
-                $row['BON'] = $item->transaksiSawit->BON ?? null
-                    ? 'storage/BON/' . $item->transaksiSawit->BON
-                    : null;
+            if ($kategori === 'penjualan_sawit') {
+                $row['BON'] = $item->transaksiSawit?->BON;
+
+                $row['surat_pengantar'] = $item->transaksiSawit?->surat_pengantar;
             }
 
-            // Selalu panggil bukti_transaksi jika ada
-            $row['bukti_transaksi'] = $item->bukti_transaksi ? 'storage/bukti_transaksi/' . $item->bukti_transaksi : null;
-
-            // Tambahkan surat pengantar
-            $row['surat_pengantar'] = $item->surat_pengantar ? 'storage/surat_pengantar/' . $item->surat_pengantar : null;
+            $row['bukti_transaksi'] = $item->bukti_transaksi;
 
             $dokumentasi[] = $row;
         }
 
+
         return view('admin.dokumentasi.index', compact('dokumentasi'));
     }
-
-
 }
