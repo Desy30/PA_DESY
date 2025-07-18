@@ -16,6 +16,8 @@ return new class extends Migration
             $table->uuid('id_transaksi');
             $table->string('nama');
             $table->timestamps();
+
+            $table->foreign('id_transaksi')->references('id')->on('transaksi')->onDelete('cascade');
         });
     }
 

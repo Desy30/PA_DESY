@@ -24,14 +24,14 @@ class DokumentasiController extends Controller
                 'kategori' => $item->kategori->nama_kategori ?? '-',
                 'total' => $item->total ?? '-',
                 'tanggal' => $item->tanggal ?? '-',
-                'BON' => null,
+                'bon' => null,
                 'bukti_transaksi' => null,
                 'surat_pengantar' => null,
             ];
 
-            // BON berdasarkan kategori
+            // bon berdasarkan kategori
             if ($kategori === 'penjualan_sawit') {
-                $row['BON'] = $item->transaksiSawit?->BON;
+                $row['bon'] = $item->transaksiSawit?->bon;
 
                 $row['surat_pengantar'] = $item->transaksiSawit?->surat_pengantar;
             }

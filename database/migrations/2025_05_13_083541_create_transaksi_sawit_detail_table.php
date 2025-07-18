@@ -21,7 +21,7 @@ return new class extends Migration
             $table->double('berat_bersih')->nullable();
             $table->double('harga')->nullable();
             $table->string('surat_pengantar')->nullable();
-            $table->string('BON')->nullable();
+            $table->string('bon')->nullable();
             $table->string('status_pengiriman')->default('Belum Terkirim');
             $table->timestamps();
             $table->foreign('id_transaksi')->references('id')->on('transaksi');

@@ -32,7 +32,9 @@
                         <th>Tanggal</th>
                         <th>Jenis</th>
                         <th>Status Pengiriman</th>
+                        @role('kasir')
                         <th>Aksi</th>
+                      @endrole
                     </tr>
                 </thead>
                 <tbody>
@@ -55,6 +57,7 @@
                                 </span>
                             </td>
                             <td>
+                                @role('kasir')
                                 @hasallroles('pemilik')
                                     @if ($t->status_pengiriman == 'Menunggu')
                                         🔴 Menunggu
@@ -84,6 +87,7 @@
                                     </form>
 
                                 @endhasanyrole
+                                @endrole
                             </td>
                         </tr>
                     @empty

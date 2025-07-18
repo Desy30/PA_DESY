@@ -57,8 +57,8 @@
                             </td>
 
                             <td>
-                                @if (!empty($item['BON']))
-                                    <a href="{{ asset('storage/BON/' . $item['BON']) }}" target="_blank"
+                                @if (!empty($item['bon']))
+                                    <a href="{{ asset('storage/bon/' . $item['bon']) }}" target="_blank"
                                         class="btn btn-sm btn-outline-success">
                                         <i class="dw dw-receipt"></i> Lihat
                                     </a>
@@ -69,7 +69,7 @@
 
                             <td>
                                 @if (!empty($item['bukti_transaksi']))
-                                    <a href="{{ asset('storage/bukti_transaksi/' . $item['bukti_transaksi']) }}" target="_blank"
+                                    <a href="{{ asset('storage/bukti-transaksi/' . $item['bukti_transaksi']) }}" target="_blank"
                                         class="btn btn-sm btn-outline-danger">
                                         <i class="dw dw-checked"></i> Lihat
                                     </a>

@@ -165,7 +165,7 @@ class PengeluaranController extends Controller
             // Validasi file bukti transaksi
 
             $bukti_transaksi_kendaraan = $request->file('bukti_transaksi_kendaraan');
-            $namaFileBuktiTransaksiKendaraan = 'bukti_transaksi_kendaraan-' . time() . '.' . $bukti_transaksi_kendaraan->getClientOriginalExtension();
+            $namaFileBuktiTransaksiKendaraan = 'bukti-transaksi_kendaraan-' . time() . '.' . $bukti_transaksi_kendaraan->getClientOriginalExtension();
 
             // Simpan ke folder storage/app/public/bukti_transaksi_kendaraan/
             Storage::putFileAs('bukti-transaksi', $bukti_transaksi_kendaraan, $namaFileBuktiTransaksiKendaraan);
@@ -216,9 +216,9 @@ class PengeluaranController extends Controller
                 'potongan_gaji.required' => 'Potongan harus diisi.',
             ]);
 
-                        $bukti_transaksi_gaji = $request->file('bukti_transaksi_gaji');
-                        $namaFileBuktiTransaksiGaji = 'bukti-gaji-' . time() . '.' . $bukti_transaksi_gaji->getClientOriginalExtension();
-                        Storage::putFileAs('bukti-transaksi', $bukti_transaksi_gaji, $namaFileBuktiTransaksiGaji);
+            $bukti_transaksi_gaji = $request->file('bukti_transaksi_gaji');
+            $namaFileBuktiTransaksiGaji = 'bukti-gaji-' . time() . '.' . $bukti_transaksi_gaji->getClientOriginalExtension();
+            Storage::putFileAs('bukti-transaksi', $bukti_transaksi_gaji, $namaFileBuktiTransaksiGaji);
             //transaksi
             $transaksi = TransaksiModel::create([
                 'tanggal' => $request->tanggal_gaji,
@@ -310,4 +310,3 @@ class PengeluaranController extends Controller
             ->stream('bon-sawit.pdf');
     }
 }
-
