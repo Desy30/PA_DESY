@@ -9,7 +9,7 @@ use App\Models\TransaksiSawitModel;
 
 class TransaksiModel extends Model
 {
-    use HasFactory,HasUuids;
+    use HasFactory, HasUuids;
     protected $table = 'transaksi';
 
     protected $fillable = [
@@ -30,23 +30,28 @@ class TransaksiModel extends Model
 
 
 
-    public  function petani () {
+    public  function petani()
+    {
         return $this->belongsTo(PetaniModel::class, 'id_petani');
     }
 
-    public function pks () {
+    public function pks()
+    {
         return $this->belongsTo(PksModel::class, 'id_pks');
     }
 
-    public function supplier_pupuk () {
+    public function supplier_pupuk()
+    {
         return $this->belongsTo(SupplierPupukModel::class, 'id_supplier');
     }
 
-    public function kategori () {
+    public function kategori()
+    {
         return $this->belongsTo(KategoriModel::class, 'id_kategori');
     }
 
-    public function user () {
+    public function user()
+    {
         return $this->belongsTo(User::class, 'id_user');
     }
     public function transaksiSawit()
@@ -85,7 +90,4 @@ class TransaksiModel extends Model
     {
         return $this->belongsTo(KaryawanModel::class, 'id_karyawan');
     }
-
 }
-
-

@@ -5,8 +5,11 @@
 @section('content')
     <div class="container-fluid py-4">
 
-        <h4 class="mb-4 fw-bold">Dashboard</h4>
-
+        <div class="page-header mb-3">
+            <div class="title">
+                <h4>Dashboard</h4>
+            </div>
+        </div>
         <div class="row g-4 mb-4">
             <div class="col-md-4">
                 <div class="card shadow-sm border-0">

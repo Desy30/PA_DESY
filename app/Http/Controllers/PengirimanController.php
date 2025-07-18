@@ -12,10 +12,11 @@ class PengirimanController extends Controller
 {
     public function index(Request $request)
     {
-        $query = TransaksiModel::with('kategori')
+        $query = TransaksiModel::with(['kategori', 'transaksiSawit'])
             ->whereHas('kategori', function ($q) {
                 $q->where('jenis_kategori', 'pemasukan');
-            });
+            })->whereHas('transaksiSawit');
+
 
         if ($request->filled('status_pengiriman') && $request->status_pengiriman !== 'Semua') {
             $query->where('status_pengiriman', $request->status_pengiriman);
@@ -42,13 +43,20 @@ class PengirimanController extends Controller
         $file = $request->file('bon');
         $fileName = time() . '.' . $file->getClientOriginalExtension();
 
-        Storage::putFileAs('BON', $file, $fileName);
+        Storage::putFileAs('bon', $file, $fileName);
 
         $transaksi = TransaksiModel::findOrFail($id);
+
+
         $transaksi->update([
             'total' => $request->total,
-            'BON' => $fileName,
             'status_pengiriman' => 'Selesai'
+        ]);
+
+        $transaksiSawit = TransaksiSawitModel::where('id_transaksi', $transaksi->id)->first();
+
+        $transaksiSawit->update([
+            'bon' => $fileName
         ]);
 
         return redirect()->route('pengiriman')->with('success', 'Status pengiriman diperbarui.');
