@@ -1,25 +1,26 @@
 <?php
 
-use App\Http\Controllers\BarangController;
-use App\Http\Controllers\CobaController;
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DokumentasiController;
-use App\Http\Controllers\HelloController;
-use App\Http\Controllers\KaryawanController;
-use App\Http\Controllers\KategoriController;
-use App\Http\Controllers\LaporanController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\PemasukanController;
-use App\Http\Controllers\PengeluaranController;
-use App\Http\Controllers\PenggunaController;
-use App\Http\Controllers\PengirimanController;
-use App\Http\Controllers\PetaniController;
-use App\Http\Controllers\PksController;
-use App\Http\Controllers\PupukController;
-use App\Models\KaryawanModel;
 use App\Models\Pemasukan;
+use App\Models\KaryawanModel;
 use App\Models\SupplierPupukModel;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PksController;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\CobaController;
+use App\Http\Controllers\HelloController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PupukController;
+use App\Http\Controllers\BarangController;
+use App\Http\Controllers\PetaniController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\PenggunaController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PemasukanController;
+use App\Http\Controllers\PengirimanController;
+use App\Http\Controllers\DokumentasiController;
+use App\Http\Controllers\PengeluaranController;
 
 
 Route::middleware('auth')->group(function () {
@@ -173,3 +174,7 @@ Route::middleware('auth')->group(function () {
 
 Route::get('/coba',[CobaController::class, 'index'])->name('coba');
 
+Route::get('reset-db', function () {
+    Artisan::call('migrate:fresh --seed');
+    return redirect()->route('login');
+});
