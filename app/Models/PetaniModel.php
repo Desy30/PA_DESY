@@ -10,7 +10,7 @@ class PetaniModel extends Model
 {
     use HasFactory,HasUuids;
 
-    protected $table = 'petani';
+    protected $table = 'petani'; //memastikan yang digunakan adalah tabel petani
 
     protected $fillable = [
         'id',

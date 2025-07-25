@@ -17,15 +17,13 @@ class TransaksiSeeder extends Seeder
     public function run(): void
     {
         foreach (KategoriModel::all() as $kategori) {
-            for ($i=0; $i < 5; $i++) {
+            for ($i = 0; $i < 5; $i++) {
                 TransaksiModel::create([
                     'id_kategori' => $kategori->id,
-                    'total' => fake()->randomNumber(5),
+                    'total' => fake()->numberBetween(1000000, 10000000),
                     'tanggal' => fake()->dateTimeBetween('-2 year', 'now')
                 ]);
             }
         }
     }
 }
-
-
