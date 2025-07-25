@@ -1,6 +1,8 @@
 @extends('layouting.guest.master')
 @section('title', 'Petani')
 
+{{-- --body isi kolom-- --}}
+
 @section('content')
 <div class="page-header">
 <div class="title">

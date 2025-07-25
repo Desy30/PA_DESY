@@ -19,6 +19,7 @@
         <div class="pd-20">
 
             <form method="POST" action="{{ route('pemasukan.store') }}" enctype="multipart/form-data">
+                {{-- jika ada inputan file harus ada enctype,jika tidak ada maka data tidak tersimpan --}}
                 @csrf
                 <!-- Sumber Pemasukan (Dropdown) -->
                 @if ($errors->any())

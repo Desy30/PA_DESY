@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\BarangController;
+use App\Http\Controllers\CobaController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DokumentasiController;
+use App\Http\Controllers\HelloController;
 use App\Http\Controllers\KaryawanController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\LaporanController;
@@ -168,3 +170,6 @@ Route::middleware('auth')->group(function () {
     Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan');
     Route::get('/laporan/export', [LaporanController::class, 'exportPdf'])->name('laporan.export.pdf');
 });
+
+Route::get('/coba',[CobaController::class, 'index'])->name('coba');
+

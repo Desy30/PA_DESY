@@ -3,11 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\PetaniModel;
-use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Exception;
-use Illuminate\Support\Facades\Storage;
 
 class PetaniController extends Controller
 {
@@ -59,6 +57,9 @@ class PetaniController extends Controller
 
     public function update(Request $request, $id)
     {
+        // Mengambil data petani berdasarkan UUID
+        $petani = PetaniModel::findOrFail($id);
+
         // Validasi data
         $request->validate([
             'nama_petani' => 'required',
@@ -66,10 +67,6 @@ class PetaniController extends Controller
             'alamat_petani' => 'required',
             'nomor_rekening_petani' => 'required',
         ]);
-
-        // Mengambil data petani berdasarkan UUID
-        $petani = PetaniModel::findOrFail($id);
-
         // Memperbarui data petani
         $petani->update([
             'nama_petani' => $request->nama_petani,
@@ -77,8 +74,6 @@ class PetaniController extends Controller
             'alamat_petani' => $request->alamat_petani,
             'nomor_rekening_petani' => $request->nomor_rekening_petani,
         ]);
-
-
 
         return redirect()->route('petani')->with('success', 'Data petani berhasil diperbarui!');
     }
