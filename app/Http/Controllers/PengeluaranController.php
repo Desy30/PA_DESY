@@ -202,7 +202,6 @@ class PengeluaranController extends Controller
                 'bukti_transaksi_gaji' => 'required',
                 'id_karyawan' => 'required',
                 'total_gaji' => 'required',
-                'periode' => 'required',
                 'tunjangan' => 'required',
                 'potongan_gaji' => 'required',
             ], [
@@ -211,7 +210,6 @@ class PengeluaranController extends Controller
                 'bukti_transaksi_gaji.required' => 'Bukti transaksi harus diisi.',
                 'id_karyawan.required' => 'Karyawan harus diisi.',
                 'total_gaji.required' => 'Total gaji harus diisi.',
-                'periode.required' => 'Periode harus diisi.',
                 'tunjangan.required' => 'Tunjangan harus diisi.',
                 'potongan_gaji.required' => 'Potongan harus diisi.',
             ]);
@@ -232,7 +230,6 @@ class PengeluaranController extends Controller
             //TransaksiGaji
             TransaksiGajiModel::create([
                 'id_karyawan' => $request->id_karyawan,
-                'periode' => $request->periode,
                 'tunjangan' => $request->tunjangan,
                 'potongan_gaji' => $request->potongan_gaji,
                 'id_transaksi' => $transaksi->id
@@ -252,14 +249,13 @@ class PengeluaranController extends Controller
                 'total_default' => 'required',
                 'metode_pembayaran_default' => 'required',
                 'bukti_transaksi_default' => 'required',
-                'keterangan_default' => 'required',
+
 
             ], [
                 'tanggal_default.required' => 'Tanggal harus diisi.',
                 'total_default.required' => 'Total harus diisi.',
                 'metode_pembayaran_default.required' => 'Metode pembayaran harus diisi.',
                 'bukti_transaksi_default.required' => 'Bukti transaksi harus diisi.',
-                'keterangan_default.required' => 'Keterangan harus diisi.',
 
             ]);
 

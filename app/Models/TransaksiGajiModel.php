@@ -18,7 +18,6 @@ class TransaksiGajiModel extends Model
     protected $fillable = [
         'id_transaksi',
         'id_karyawan',
-        'periode',
         'tunjangan',
         'potongan_gaji',
         'keterangan'

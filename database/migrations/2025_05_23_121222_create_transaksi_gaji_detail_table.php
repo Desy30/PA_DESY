@@ -15,7 +15,7 @@ return new class extends Migration
             $table->uuid('id')->primary()->unique();
             $table->uuid('id_transaksi');
             $table->uuid('id_karyawan');
-            $table->date('periode');
+            // $table->date('periode');
             $table->double('tunjangan')->nullable();
             $table->double('potongan_gaji');
             $table->text('keterangan')->nullable();

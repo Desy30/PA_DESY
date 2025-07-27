@@ -29,10 +29,10 @@
                 <thead>
                     <tr>
                         <th>No.</th>
-                        <th>Tanggal</th>
-                        <th>Sumber</th>
-                        <th>Jumlah</th>
-                        <th>Menu</th>
+                        <th>📅 Tanggal</th>
+                        <th>📤 Sumber</th>
+                        <th>💵 Jumlah</th>
+                        <th>⋯ Menu</th>
                     </tr>
                 </thead>
                 <tbody>
