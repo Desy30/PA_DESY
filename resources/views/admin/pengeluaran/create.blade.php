@@ -32,6 +32,7 @@
                 <div class="form-group">
                     <label for="sumber_pengeluaran">Sumber Pengeluaran</label>
                     <select class="form-control" id="sumber_pengeluaran" name="sumber_pengeluaran">
+                        <option value="">-- Pilih Kategori --</option>
                         @foreach ($kategoris as $item)
                             <option value="{{ $item->tipe_form }}.{{ $item->id }}">{{ $item->nama_kategori }}</option>
                         @endforeach
@@ -259,18 +260,13 @@
                 <div id="pengeluaran_gaji" style="display: none;">
                     <div class="row">
                         <!-- Tanggal Gaji -->
-                        <div class="col-md-6 mb-3">
+                        <div class="col-md-12 mb-3">
                             <label for="tanggal_gaji">Tanggal Gaji</label>
                             <input type="date" class="form-control" id="tanggal_gaji" name="tanggal_gaji"
                                 value="{{ old('tanggal_gaji') }}">
                         </div>
 
-                        <!-- Periode -->
-                        <div class="col-md-6 mb-3">
-                            <label for="periode">Periode</label>
-                            <input type="date" class="form-control" id="periode" name="periode"
-                                value="{{ old('periode') }}">
-                        </div>
+
 
                         <!-- Nama Karyawan -->
                         <div class="col-md-6 mb-3">
@@ -341,18 +337,46 @@
                     <div class="row">
                         <div class="col-12 col-md-6">
                             <div class="form-group">
-                                <label for="keterangan_default">Keterangan</label>
-                                <input type="text" class="form-control" id="keterangan_default"
-                                    name="keterangan_default" placeholder="Masukkan keterangan"
-                                    value="{{ old('keterangan_default') }}">
+                                <label for="tanggal_default">Tanggal </label>
+                                <input type="date" class="form-control" id="tanggal_default" name="tanggal_default"
+                                    value="{{ old('tanggal_default') }}">
                             </div>
                         </div>
                         <div class="col-12 col-md-6">
                             <div class="form-group">
+                                <label for="keterangan">Keterangan</label>
+                                <input type="text" class="form-control" id="keterangan" name="keterangan"
+                                    value="{{ old('keterangan') }}">
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <div class="form-group">
                                 <label for="bukti_transaksi_default">Bukti Transaksi</label>
                                 <input type="file" class="form-control" id="bukti_transaksi_default"
-                                    name="bukti_transaksi_default" accept="image/*">
+                                    name="bukti_transaksi_default" accept="image/*,application/pdf">
+
                             </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <div class ="form-group">
+                                <label for="metode_pembayaran_default">Metode Pembayaran</label>
+                                <select class="form-control" id="metode_pembayaran_default" name="metode_pembayaran_default">
+                                    <option value="cash" {{ old('metode_pembayaran_default') == 'cash' ? 'selected' : '' }}>Cash
+                                    </option>
+                                    <option value="transfer"
+                                        {{ old('metode_pembayaran_default') == 'transfer' ? 'selected' : '' }}>
+                                        Transfer</option>
+                                </select>
+                            </div>
+                        </div>
+                        <!-- Jumlah (Input Number) -->
+                        <div class="col-12">
+                        <div class="form-group">
+                            <label for="total_default">Jumlah (Rp)</label>
+                            <input type="number" class="form-control" id="total_default" name="total_default"
+                                value="{{ old('total_default') }}">
+                        </div>
                         </div>
                     </div>
                 </div>

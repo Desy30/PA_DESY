@@ -76,10 +76,7 @@
                             <th>Karyawan</th>
                             <td>{{ $pengeluaran->transaksiGaji->karyawan->nama_karyawan ?? '-' }}</td>
                         </tr>
-                        <tr>
-                            <th>Periode</th>
-                            <td>{{ $pengeluaran->transaksiGaji->periode ?? '-' }}</td>
-                        </tr>
+                    
                         <tr>
                             <th>Tunjangan</th>
                             <td>Rp {{ number_format($pengeluaran->transaksiGaji->tunjangan ?? 0) }}</td>

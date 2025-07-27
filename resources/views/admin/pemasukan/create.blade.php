@@ -249,21 +249,23 @@
                         </div>
                         <div class="col-12 col-md-6">
                             <div class ="form-group">
-                                <label for="metode_pembayaran">Metode Pembayaran</label>
-                                <select class="form-control" id="metode_pembayaran" name="metode_pembayaran">
-                                    <option value="cash" {{ old('metode_pembayaran') == 'cash' ? 'selected' : '' }}>Cash
+                                <label for="metode_pembayaran_default">Metode Pembayaran</label>
+                                <select class="form-control" id="metode_pembayaran_default" name="metode_pembayaran_default">
+                                    <option value="cash" {{ old('metode_pembayaran_default') == 'cash' ? 'selected' : '' }}>Cash
                                     </option>
                                     <option value="transfer"
-                                        {{ old('metode_pembayaran') == 'transfer' ? 'selected' : '' }}>
+                                        {{ old('metode_pembayaran_default') == 'transfer' ? 'selected' : '' }}>
                                         Transfer</option>
                                 </select>
                             </div>
                         </div>
                         <!-- Jumlah (Input Number) -->
+                        <div class="col-12">
                         <div class="form-group">
                             <label for="total_default">Jumlah (Rp)</label>
                             <input type="number" class="form-control" id="total_default" name="total_default"
                                 value="{{ old('total_default') }}">
+                        </div>
                         </div>
                     </div>
                 </div>

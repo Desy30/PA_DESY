@@ -166,7 +166,7 @@ class PemasukanController extends Controller
             'keterangan' => 'required',
             'bukti_transaksi_default' => 'required|file',
             'total_default' => 'required',
-            'metode_pembayaran' => 'required',
+            'metode_pembayaran_default' => 'required',
         ]);
 
         $file = $request->file('bukti_transaksi_default');
@@ -177,7 +177,7 @@ class PemasukanController extends Controller
             'keterangan' => $request->keterangan,
             'bukti_transaksi' => $filename,
             'total' => $request->total_default,
-            'metode_pembayaran' => $request->metode_pembayaran,
+            'metode_pembayaran' => $request->metode_pembayaran_default,
             'id_kategori' => $request->id_kategori
         ]);
 
