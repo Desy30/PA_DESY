@@ -137,9 +137,10 @@
     {{-- Chart JS --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Submit the form when either select is changed
+        // getElementById berfungsi mengambil elemen dengan id (..)
+        //.addEventListener[] dalah fungsi saat isi dropdown
         document.getElementById('filter-pemasukan').addEventListener('change', function () {
-            document.getElementById('filter-form').submit();
+            document.getElementById('filter-form').submit();//submit otomatis
         });
 
         document.getElementById('filter-pengeluaran').addEventListener('change', function () {
@@ -147,7 +148,8 @@
         });
     </script>
     <script>
-        // Pemasukan Chart
+        // membuat grafik baru, datanya jika labels sumbu x isinya bulan atau tahun
+        //jika data sumbu y isinya nilai total
         new Chart(document.getElementById('pemasukanChart'), {
             type: 'bar',
             data: {

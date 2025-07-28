@@ -10,6 +10,8 @@ use Illuminate\Support\Facades\Storage;
 
 class PengirimanController extends Controller
 {
+//mengambil data pada tabel transaksi yang memiliki kategori pemasukan.
+//relasi transaksiSawit digunakan untuk mengambil data dari tabel transaksiSawit.
     public function index(Request $request)
     {
         $query = TransaksiModel::with(['kategori', 'transaksiSawit'])
@@ -28,18 +30,19 @@ class PengirimanController extends Controller
     }
     public function edit($id)
     {
+        //menampilkan form edit berdasarkan id yang dipilih
         $pengiriman = TransaksiModel::findOrFail($id);
         return view('admin.pengiriman.edit', compact('pengiriman'));
     }
 
     public function updateShow(Request $request, $id)
     {
-        // dd($request->all());
+        //melakukan validasi sesuai inputan edit
         $request->validate([
             'bon' => 'required|file',
             'total' => 'required'
         ]);
-
+        //simpan file bon storage
         $file = $request->file('bon');
         $fileName = time() . '.' . $file->getClientOriginalExtension();
 
@@ -47,7 +50,7 @@ class PengirimanController extends Controller
 
         $transaksi = TransaksiModel::findOrFail($id);
 
-
+        //update total dan status_pengiriman dan ubah status jadi selesai
         $transaksi->update([
             'total' => $request->total,
             'status_pengiriman' => 'Selesai'
@@ -65,10 +68,11 @@ class PengirimanController extends Controller
 
     public function update(Request $request, $id)
     {
+        //melakukan validasi sesuai inputan
         $request->validate([
             'status_pengiriman' => 'required|in:Menunggu,Terkirim,Selesai',
         ]);
-
+        //jika selesai-> arahkan ke edit
         if (strtolower($request->status_pengiriman) === 'selesai') {
             return redirect()->route('pengiriman.edit', $id);
         }

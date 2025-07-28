@@ -280,13 +280,14 @@
 @endsection
 @push('scripts')
     <script>
-        // Fungsi untuk menangani perubahan pada sumber pemasukan
+        // pilih dropdown sumber pemasukan
         $("#sumber_pemasukan").change(function() {
+            // Ambil nilai yang dipilih
             var sumberPemasukan = $(this).val();
-
+            //dipisah dengan titik
             var sumberPemasukan = sumberPemasukan.split('.')[0]
 
-            // Sembunyikan semua bagian form terlebih dahulu
+            // Sembunyikan semua bagian form terlebih sebelum tampilan sesuai
             $("#penjualan_sawit").hide();
             $("#penjualan_pupuk").hide();
             $("#sewa_timbangan").hide();

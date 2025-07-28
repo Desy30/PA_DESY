@@ -15,6 +15,7 @@ class DokumentasiController extends Controller
     {
         $transaksi = TransaksiModel::with(['kategori', 'transaksiSawit'])->orderBy('tanggal', 'desc')->get();
 
+        //simpan data format array
         $dokumentasi = [];
 
         foreach ($transaksi as $item) {
