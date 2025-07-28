@@ -394,6 +394,7 @@
 
 @push('scripts')
     <script>
+        //tampilkan form sesuai pilihan
         function toggleForm() {
             var sumberPengeluaran = $("#sumber_pengeluaran").val();
             var sumberPengeluaran = sumberPengeluaran.split('.')[0]
@@ -426,7 +427,7 @@
             $("#sumber_pengeluaran").change(toggleForm);
         });
 
-
+        //perhitungan otomatis(pembelian sawit)
         $(document).ready(function() {
             var inputBruto = $('#bruto');
             var inputTara = $('#tara');
@@ -438,15 +439,17 @@
             var inputHargaPerKilo = $("#harga_per_kg")
             var inputHargaTotalSawit = $("#total_harga_sawit")
 
+            //untuk netto (bruto - tara)
             function hitungSeluruh() {
                 var valBruto = parseInt(inputBruto.val());
                 var valTara = parseInt(inputTara.val());
                 var netto = valBruto - valTara;
                 inputNetto.val(netto);
 
+                //untuk jumlah potongan(persentase=netto*%),(nilai tetap= netto- potongan)
                 var intValPotongan = parseInt(inputPotongan.val())
                 var valJenisPotongan = inputJenisPotongan.val()
-
+                //jumlah akhir sesuai inputan
                 var jumlahAkhirPotongan = 0
 
                 if (valJenisPotongan == 'persentase') {
@@ -454,19 +457,21 @@
                 } else {
                     jumlahAkhirPotongan = netto - intValPotongan
                 }
-
+                //akhir jumlah potongan
                 var nilaiTotalPotongan = Math.round(netto - jumlahAkhirPotongan)
                 inputJumlahPotongan.val(nilaiTotalPotongan)
 
+                //untuk berat bersih(netto-potongan)
                 var nilaiBeratBersih = Math.round(netto - nilaiTotalPotongan)
                 inputBeratBersih.val(nilaiBeratBersih)
 
+                //untuk harga total sawit(berat besih*harga per kilo)
                 var valHargaPerKilo = parseInt(inputHargaPerKilo.val())
                 var nilaiHargaTotalSawit = nilaiBeratBersih * valHargaPerKilo
 
                 inputHargaTotalSawit.val(nilaiHargaTotalSawit)
             }
-
+            //event listener untuk inputan
             inputBruto.on('input', function() {
                 hitungSeluruh();
             })
@@ -489,7 +494,7 @@
             })
         })
         $(document).ready(function() {
-            // Ambil elemen input
+            // Mendapatkan elemen input
             const inputGaji = document.getElementById('gaji');
             const inputTunjangan = document.getElementById('tunjangan');
             const inputPotonganGaji = document.getElementById('potongan_gaji');

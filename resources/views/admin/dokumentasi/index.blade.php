@@ -25,7 +25,7 @@
                 </div>
             @endif
         </div>
-
+        {{-- menampilkan semua dokumen surat dari setiap transaksi --}}
         <div class="pb-20">
             <table class="data-table table stripe hover nowrap">
                 <thead>
@@ -43,9 +43,10 @@
                         <tr>
                             <td class="table-plus">{{ $index + 1 }}</td>
                             <td>{{ \Carbon\Carbon::parse($item['tanggal'])->translatedFormat('d F Y') }}</td>
+                            {{-- /// menampilkan nama kategori --}}
                             <td>{{ $item['kategori'] }}</td>
-
                             <td>
+                                {{-- menampilkan surat pengantar --}}
                                 @if (!empty($item['surat_pengantar']))
                                     <a href="{{ asset('storage/surat-pengantar/' . $item['surat_pengantar']) }}" target="_blank"
                                         class="btn btn-sm btn-outline-primary">
@@ -57,6 +58,7 @@
                             </td>
 
                             <td>
+                                {{-- menampilkan bon --}}
                                 @if (!empty($item['bon']))
                                     <a href="{{ asset('storage/bon/' . $item['bon']) }}" target="_blank"
                                         class="btn btn-sm btn-outline-success">
@@ -68,6 +70,7 @@
                             </td>
 
                             <td>
+                                {{-- menampilkan bukti transaksi --}}
                                 @if (!empty($item['bukti_transaksi']))
                                     <a href="{{ asset('storage/bukti-transaksi/' . $item['bukti_transaksi']) }}" target="_blank"
                                         class="btn btn-sm btn-outline-danger">

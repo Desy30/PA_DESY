@@ -33,8 +33,8 @@
                         <th>Jenis</th>
                         <th>Status Pengiriman</th>
                         @role('kasir')
-                        <th>Aksi</th>
-                      @endrole
+                            <th>Aksi</th>
+                        @endrole
                     </tr>
                 </thead>
                 <tbody>
@@ -58,35 +58,35 @@
                             </td>
                             <td>
                                 @role('kasir')
-                                @hasallroles('pemilik')
-                                    @if ($t->status_pengiriman == 'Menunggu')
-                                        🔴 Menunggu
-                                    @elseif ($t->status_pengiriman == 'Terkirim')
-                                        🟡 Terkirim
+                                    @hasallroles('pemilik')
+                                        @if ($t->status_pengiriman == 'Menunggu')
+                                            🔴 Menunggu
+                                        @elseif ($t->status_pengiriman == 'Terkirim')
+                                            🟡 Terkirim
+                                        @else
+                                            🟢 Selesai
+                                        @endif
                                     @else
-                                        🟢 Selesai
-                                    @endif
-                                @else
-                                    <form action="{{ route('pengiriman.update', $t->id) }}" method="POST">
-                                        @csrf @method('PUT')
-                                        <div class="input-group">
-                                            <select name="status_pengiriman" class="custom-select form-control"
-                                                onchange="this.form.submit()">
-                                                <option disabled selected>Ubah Status</option>
-                                                <option value="Menunggu"
-                                                    {{ $t->status_pengiriman == 'Menunggu' ? 'selected' : '' }}>🔴 Menunggu
-                                                </option>
-                                                <option value="Terkirim"
-                                                    {{ $t->status_pengiriman == 'Terkirim' ? 'selected' : '' }}>🟡 Terkirim
-                                                </option>
-                                                <option value="Selesai"
-                                                    {{ $t->status_pengiriman == 'Selesai' ? 'selected' : '' }}>🟢 Selesai
-                                                </option>
-                                            </select>
-                                        </div>
-                                    </form>
+                                        <form action="{{ route('pengiriman.update', $t->id) }}" method="POST">
+                                            @csrf @method('PUT')
+                                            <div class="input-group">
+                                                <select name="status_pengiriman" class="custom-select form-control"
+                                                    onchange="this.form.submit()">
+                                                    <option disabled selected>Ubah Status</option>
+                                                    <option value="Menunggu"
+                                                        {{ $t->status_pengiriman == 'Menunggu' ? 'selected' : '' }}>🔴 Menunggu
+                                                    </option>
+                                                    <option value="Terkirim"
+                                                        {{ $t->status_pengiriman == 'Terkirim' ? 'selected' : '' }}>🟡 Terkirim
+                                                    </option>
+                                                    <option value="Selesai"
+                                                        {{ $t->status_pengiriman == 'Selesai' ? 'selected' : '' }}>🟢 Selesai
+                                                    </option>
+                                                </select>
+                                            </div>
+                                        </form>
 
-                                @endhasanyrole
+                                    @endhasanyrole
                                 @endrole
                             </td>
                         </tr>
